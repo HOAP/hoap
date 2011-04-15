@@ -22,5 +22,8 @@ Hoap::Application.configure do
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
+
+  # Load jQuery and jQuery UI.
+  config.action_view.javascript_expansions[:defaults] = %w(jquery jquery-ui rails)
 end
 
