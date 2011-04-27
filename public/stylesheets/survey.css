@@ -1,0 +1,130 @@
+body { background-color: #fff; color: #333; }
+
+body, p, ol, ul, td {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size:   100%;
+  line-height: 140%;
+}
+
+div#content {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1, h2 {
+  text-align: center;
+  line-height: 1.2;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th.title {
+  font-size: 70%;
+  vertical-align: bottom;
+  width: 6em;
+}
+
+td {
+  padding: 3px;
+}
+
+a { color: #000; }
+a:visited { color: #666; }
+a:hover { color: #fff; background-color:#000; }
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+}
+
+.errorNote {
+  color: red;
+}
+
+.error {
+  text-align: center;
+  color: red;
+}
+
+.notice {
+  text-align: center;
+  color: green;
+}
+
+.hide {
+  visibility: hidden;
+}
+
+.notabene {
+  font-style: italic;
+  font-size: 80%;
+  background-color: #CFCFCF;
+  border: 1px solid gray;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+p.author {
+  text-align: center;
+  font-style: italic;
+}
+
+table.ascale {
+  border: 1px solid black;
+  text-align: center;
+  width: 100%;
+}
+
+table.ascale td {
+  border: 1px solid black;
+}
+
+.codebox {
+  background-color: #FFFA5E;
+  border: 1px solid gray;
+  padding: 2px
+}
+
+/* Alternating row colours for some questions */
+.row-colour-0 {
+  background-color: #f0f6ff;
+}
+
+.row-colour-1 {
+  background-color: #ddecff;
+}
+
+table.partlist {
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.partlist td, th {
+  padding: 5px;
+}
+
+.complete {
+  background-color: #8FED8F;
+}
+
+.incomplete {
+  background-color: #E06A6C;
+}
+
+#timer {
+  font-size: 24pt;
+  font-weight: bold;
+  position: absolute;
+  float: left;
+  left: 2em;
+  border: 1px solid black;
+  padding: 0.5em;
+}
+
+.errorCell {
+  border: 3px solid red;
+}
