@@ -1,2 +1,10 @@
-<h1>Survey#index</h1>
-<p>Find me in app/views/survey/index.html.erb</p>
+%h1 Welcome to the Hunter Outpatient Alcohol Project
+
+%div{:style => "text-align: center;"}
+  %p
+    Please enter your invitation code below, then click the &ldquo;Start
+    Survey&rdquo; button.
+
+  - form_tag :action => 'start' do
+    %p= text_field_tag "code"
+    %p= submit_tag "Start Survey"
