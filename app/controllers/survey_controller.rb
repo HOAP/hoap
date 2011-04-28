@@ -1,4 +1,6 @@
 class SurveyController < ApplicationController
+  before_filter :get_participant, :only => [:page, :feedback]
+
   def index
   end
 
@@ -20,6 +22,16 @@ class SurveyController < ApplicationController
   end
 
   def feedback
+  end
+
+  private
+
+  def get_participant
+    @participant = Participant.where(:key => params[:key]).first
+    if @participant.nil?
+      flash[:error] = "Unknown participant code."
+      redirect_to :action => 'index'
+    end
   end
 
 end
