@@ -21,7 +21,7 @@ class SurveyController < ApplicationController
   def page
     @questions = Question.find_for(@participant)
     @answers = Answer.find_for(@participant)
-    render :action => "page#{participant.page}"
+    render :action => "page#{@participant.page}"
   end
 
   def feedback
