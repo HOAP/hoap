@@ -1,2 +1,18 @@
-<h1>Survey#page</h1>
-<p>Find me in app/views/survey/page.html.erb</p>
+%h1 Hunter Outpatient Alcohol Project
+
+%h2 Welcome
+
+%p
+  This survey of alcohol use among hospital patients is being conducted by
+  researchers at the University of Newcastle.
+
+%p
+  It will take approximately 5 to 15 minutes to complete and is confidential.
+  Your participation will help us to evaluate the use of this internet-based
+  approach to health promotion. In order for us to personalise this survey for
+  you, you may wish to enter a name in the box below:
+
+- form_tag save_url(:key => @participant.key, :page => 1) do
+  %div{:style => "text-align: center;"}
+    %p= text_field "participant", "name"
+    %p= submit_tag "Continue »"
