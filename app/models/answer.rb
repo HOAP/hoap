@@ -12,4 +12,20 @@ class Answer < ActiveRecord::Base
   def self.find_for(participant)
     self.where(:participant_id => participant.id, :page => participant.page).order("id ASC")
   end
+
+  # Save all Answers for a given submitted page
+  def self.save_all(params)
+    answers = []
+    error_count = 0
+    unless params == nil
+      params.each do |id, line|
+        ans = Answer.find(id)
+        ans.update_attributes(line)
+        error_count += ans.errors.length
+        answers << ans
+      end
+    end
+    answers.sort_by! { |ans| ans.id }
+    return answers, error_count
+  end
 end
