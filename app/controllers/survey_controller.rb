@@ -1,5 +1,5 @@
 class SurveyController < ApplicationController
-  before_filter :get_participant, :only => [:page, :feedback]
+  before_filter :get_participant, :only => [:page, :save, :feedback]
 
   def index
   end
@@ -22,6 +22,23 @@ class SurveyController < ApplicationController
     @questions = Question.find_for(@participant)
     @answers = Answer.find_for(@participant)
     render :action => "page#{@participant.page}"
+  end
+
+  def save
+    @participant.update_progress(params[:page])
+    if @participant.page == 1
+      @participant.update_attributes(params[:participant])
+      error_count = @participant.errors.length
+    else
+      @answers, error_count = Answer.save_all(params[:answer])
+    end
+    if error_count == 0
+      @participant.next_page!
+      redirect_to page_url(:key => @participant.key)
+    else
+      @questions = Question.find_for(@participant)
+      render :action => "page#{@participant.page}"
+    end
   end
 
   def feedback
