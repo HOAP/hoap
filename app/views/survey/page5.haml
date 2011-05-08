@@ -1,0 +1,10 @@
+%h1 Drinking in The Last Four Weeks
+
+- form_tag save_url(:page => 5, :key => @participant.key) do
+  - @question, @answer = @questions[0], @answers[0]
+  %p
+    != @question.text
+    %br
+    = render :partial => "answer"
+
+  = render :partial => "continue"
