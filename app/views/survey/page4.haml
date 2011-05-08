@@ -1,0 +1,18 @@
+= image_tag "drinks.png", :style => "float: left; position: absolute; left: 3em;"
+
+%h1 Past &amp; Current Drinking
+
+%p
+  Now we'd like to ask some questions about your past alcohol use.
+
+%p
+  Please select the option that relates best to your answer.
+
+- form_tag save_url(:page => 4, :key => @participant.key) do
+  - @questions.length.times do |i|
+    - @question, @answer = @questions[i], @answers[i]
+    %p
+      #{i + 1}. #{@question.text}
+      %br
+      = render :partial => "answer"
+  = render :partial => "continue"
