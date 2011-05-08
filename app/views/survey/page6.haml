@@ -1,0 +1,20 @@
+= image_tag "drinks.png", :style => "float: left; position: absolute; left: 3em;"
+
+%h1 Drinking in the Last Four Weeks
+
+%p
+  Now we'd like to ask you about your drinking in the LAST 4 WEEKS only. We
+  understand that this might be difficult to remember exactly so for these
+  questions please give your best estimate.
+
+%p
+  Please use the definitions of Standard Drinks on the left as a guide.
+
+- form_tag save_url(:page => 6, :key => @participant.key) do
+  - @questions.length.times do |i|
+    - @question, @answer = @questions[i], @answers[i]
+    %p
+      #{i + 1}. #{@question.text}
+      %br
+      = render :partial => "answer"
+  = render :partial => "continue"
