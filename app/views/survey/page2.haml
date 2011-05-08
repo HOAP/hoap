@@ -1,0 +1,17 @@
+%h1 About You
+
+%p
+  - if @participant.name.nil? || @participant.name == ""
+    Thanks,
+  - else
+    Thanks #{@participant.name},
+  first of all we’d like to know a few things about you:
+
+- form_tag save_url(:page => 2, :key => @participant.key) do
+  - @questions.length.times do |i|
+    - @question, @answer = @questions[i], @answers[i]
+    %p
+      #{i + 1}. #{@question.text}
+      %br
+      = render :partial => "answer"
+  =render :partial => "continue"
