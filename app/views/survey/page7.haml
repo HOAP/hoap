@@ -1,0 +1,20 @@
+%h1 How In Control Of Your Drinking Are You?
+
+%p
+  The following 10 questions concern signs of possible alcohol dependence.
+  Feedback will be provided about your risk level.
+
+%p
+  In answering these questions, think about your use of alcohol in the last 4
+  weeks and select the answer that’s most appropriate to you.
+
+- form_tag save_url(:page => 7, :key => @participant.key) do
+  %table
+    - @questions.length.times do |i|
+      - @question, @answer = @questions[i], @answers[i]
+      %tr
+        %td{:valign => "top"}
+          #{i + 1}.
+        %td= @question.text
+        %td= render :partial => "answer"
+  = render :partial => "continue"
