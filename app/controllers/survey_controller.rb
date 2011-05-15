@@ -5,7 +5,7 @@ class SurveyController < ApplicationController
   end
 
   def start
-    if !params[:code].nil? && params[:code] =~ /^[0-9a-f]{12}$/i
+    if params[:code].present? && params[:code] =~ /^[0-9a-f]{12}$/i
       @participant = Participant.where(:key => params[:code].downcase).first
       unless @participant.nil? || @participant.completed
         redirect_to page_url(@participant.key)
@@ -47,7 +47,10 @@ class SurveyController < ApplicationController
   private
 
   def get_participant
-    @participant = Participant.where(:key => params[:key]).first
+    @participant = nil
+    if params[:key].present? && params[:key] =~ /^[0-9a-f]{12}$/i
+      @participant = Participant.where(:key => params[:key]).first
+    end
     if @participant.nil?
       flash[:error] = "Unknown participant code."
       redirect_to :action => 'index'
