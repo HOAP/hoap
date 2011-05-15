@@ -1,5 +1,6 @@
 class Participant < ActiveRecord::Base
   has_many :answers
+  serialize :c_money, Array
 
   def self.make
     begin
