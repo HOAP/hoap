@@ -128,3 +128,47 @@ table.partlist td, th {
 .errorCell {
   border: 3px solid red;
 }
+
+/* Styles for feedback pages */
+table.audit {
+  float: left;
+  margin-right: 2em;
+  margin-bottom: 2em;
+  border-collapse: separate;
+}
+td.level {
+  color: #FFF;
+  text-align: center;
+  font-size: 120%;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+}
+td.text {
+  font-size: 90%;
+  padding-left: 1em;
+}
+tr.audit_other td.level {
+  border: 1px solid #696371;
+  background-color: #EBDDFE;
+}
+tr.audit_other td.text {
+  color: #666;
+}
+tr.audit_level td.level {
+  border: 1px solid #3F1470;
+  background-color: #8300FC;
+}
+tr.audit_level td.text {
+  color: #222;
+}
+p.audit_level {
+  font-weight: bold;
+}
+span.report {
+  color: #F00;
+}
+.footnote {
+  font-size: 80%;
+}

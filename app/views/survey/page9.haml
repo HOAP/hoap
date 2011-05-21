@@ -1,0 +1,162 @@
+%h1 Feedback
+
+%p Thanks for completing the survey	#{@participant.name}.
+
+%p
+  Here you will find some feedback based on the answers you have provided as
+  well as some other information on reducing the risk of harm which you may
+  find useful.
+
+%h3 Your Alcohol Use
+
+%table.audit
+  %tr{:class => audit_class(@participant.audit, 0)}
+    %td.level
+      0-7
+    %td.text
+      Moderate
+      %br
+      Drinking
+  %tr{:class => audit_class(@participant.audit, 1)}
+    %td.level
+      8-14
+    %td.text
+      Hazardous
+      %br
+      Drinking
+  %tr{:class => audit_class(@participant.audit, 2)}
+    %td.level
+      15-19
+    %td.text
+      Harmful
+      %br
+      Drinking
+  %tr{:class => audit_class(@participant.audit, 3)}
+    %td.level
+      20-40
+    %td.text
+      Alcohol
+      %br
+      Dependence
+
+%p
+  Some of the questions you answered regarding your drinking come from the
+  Alcohol Use Disorders Identification Test, a questionnaire developed by the
+  World Health Organisation to determine whether a person's drinking might be
+  becoming problematic.
+
+%p.audit_level
+  Your AUDIT score was
+  %span.report= @participant.audit
+
+%p{:class => audit_class(@participant.audit, 0)}
+  MODERATE DRINKING (0-7) Low risk of alcohol related harm.
+
+%p{:class => audit_class(@participant.audit, 1)}
+  HAZARDOUS DRINKING (8-14) High risk of experiencing alcohol related harm and
+  some people in this range may already be experiencing significant harm.
+
+%p{:class => audit_class(@participant.audit, 2)}
+  HARMFUL DRINKING (15-19) A person scoring in this range will already be
+  experiencing significant alcohol related harm.
+
+%p{:class => audit_class(@participant.audit, 3)}
+  ALCOHOL DEPENDENCE (20-40) A person scoring in this range may be alcohol
+  dependent and advised to have a clinical assessment of their drinking. To
+  find out some services that might be useful go to the SUPPORT page.
+
+%p
+  The main way to reduce your risk level (and AUDIT score) is to reduce the
+  number of drinks you consume per occasion. You may like to check out the TIPS
+  section for ideas on reducing your consumption.
+
+%h3 Your Blood Alcohol Content
+
+%p
+  %span.notabene Not yet calculated.
+
+%p
+  Your estimated Blood Alcohol Content (BAC) for your heaviest drinking
+  occasion is
+  %span.report #{@participant.bac}%
+
+%p
+  Some of the questions you answered regarding your drinking come from the
+  Alcohol Use Disorders Identification Test, a questionnaire developed by the
+  World Health Organisation to determine whether a person's drinking might be
+  becoming problematic.
+
+%p
+  This estimate takes into account you gender, weight, the number of standard
+  drinks consumed and the number of hours over which you reported drinking this
+  amount.
+
+%h3 Your Money
+
+%p
+  %span.notabene Not yet calculated.
+
+%p
+  Depending on where you buy your drinks (i.e. a bottle store, pub or club),
+  you have spent between
+  %span.report= number_to_currency @participant.money[0]
+  and
+  %span.report= number_to_currency @participant.money[1]
+  on alcohol in the last year.
+
+%h3 Your Drinking Amount Compared
+
+%h4 Standard Drinks Consumed Per Occaision
+
+%p
+  You reported having approximately #{@participant.typical_drinks} drinks on a
+  typical occasion. The graph on the right shows how this compares to medical
+  guidlines<sup>1</sup> and to other people your age and sex<sup>2</sup>.
+
+%ol.footnote
+  %li
+    Australian Institute of Health and Welfare (AIHW). 2007 National Drug
+    Strategy Household Survey: detailed results. Drug Statistics Series number
+    22. Cat. no. PHE 107. Canberra: AIHW; 2008.
+  %li
+    National Health and Medical Research Council (NHMRC). Australian guidelines
+    to reduce health risks from drinking alcohol. Canberra: NHMRC; 2009.
+
+%h4 Standard Drinks Consumed Per Week
+
+%p
+  You reported consuming approximatately #{@participant.dpw} drinks per week,
+  and #{@participant.dpw * 4} drinks per month. The graph on the left shows how
+  this compares to medical guidelines<sup>1</sup> and to other people your age
+  and sex<sup>2</sup>.
+
+%ol.footnote
+  %li
+    Australian Institute of Health and Welfare (AIHW). 2007 National Drug
+    Strategy Household Survey: detailed results. Drug Statistics Series number
+    22. Cat. no. PHE 107. Canberra: AIHW; 2008.
+  %li
+    National Health and Medical Research Council (NHMRC). Australian guidelines
+    to reduce health risks from drinking alcohol. Canberra: NHMRC; 2009.
+
+%h3 Your Risk Of Alcohol Dependence
+
+%p
+  How in control of your drinking are you? The 10 questions you answered at the
+  end of the questionnaire were from the Leeds Dependence Questionnaire, a
+  validated clinical measure of the severity of alcohol dependence.
+
+%p
+  Generally speaking, the higher the score the more reason for concern that
+  your drinking may be out of control. Your score was
+  %strong= @participant.ldq
+  and suggests that...
+
+%p
+  != ldq_suggestion(@participant.ldq)
+
+%p
+  Please see the SUPPORT page for options.
+
+- form_tag save_url(:page => 9, :key => @participant.key) do
+  = render :partial => "continue"
