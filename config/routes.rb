@@ -3,6 +3,8 @@ Hoap::Application.routes.draw do
 
   post "survey/start"
 
+  match "s/:code" => 'survey#start', :as => :start_link
+
   match "survey/page/:key" => 'survey#page', :as => :page
 
   match "survey/save/:page/:key" => 'survey#save', :as => :save, :via => :post
