@@ -1,0 +1,163 @@
+:css
+  div.contact {
+    margin-top: 3em;
+    margin-bottom: 2em;
+  }
+
+%h1 Support
+
+%p
+  Some people can stop or reduce their drinking by themselves, whilst others
+  might need some support. Here are some options:
+
+.contact
+  %h3
+    %a{:href => "http://www.aa.org.au/contact-central-service-offices.php"}<
+      Alcoholics Anonymous Newcastle Districts
+  %p
+    For information about AA &amp; general assistance call the 24 hour Helpline
+
+  %p
+    %strong Contact Information
+    %br
+    Phone: 4964 1555
+    %br
+    Email:
+    %a{:href => "mailto:aa-newcastle@aa-area-c.org"}aa-newcastle@aa-area-c.org
+
+.contact
+  %h3
+    %a{:href => "http://www.druginfo.nsw.gov.au/about_us/helplines"}<
+      Alcohol and Drug Information Service (ADIS)
+
+  %p
+    ADIS provides 24-hour confidential counselling, referral, information &amp;
+    advice to anyone concerned about their own or another's alcohol or other
+    drug use.
+
+  %p
+    %strong Contact Information
+    %br
+    Phone: 1800 422 599 or 9361 8000
+
+.contact
+  %h3
+    %a{:href => "http://www.alcoholhelpcenter.net/"}Alcohol Help Center
+
+  %p
+    The Alcohol Help Center is an interactive website dedicated to helping
+    those who have concerns about their drinking. The goal is to promote
+    interaction between people who have drinking problems and health
+    professionals. The site offers free tools and support.
+
+.contact
+  %h3
+    %a{:href => "http://www1.hnehealth.nsw.gov.au/AboriginalHealthInfo/IndigenousHealthServices.cfm"}<
+      Awabakal Medical Centre
+
+  %p
+    Specialist support and services for Aboriginal and Torres Strait Islander
+    People.
+
+  %p
+    %strong Contact Information
+    %br
+    Phone: 4969 2424 or 1800 AWABAKAL
+
+.contact
+  %h3 Hunter New England Health
+
+  %p
+    %strong Alcohol and Drug Service Intake Line (Monday – Friday 8am – 4pm)
+
+  %p
+    %strong Contact Information
+    %br
+    Phone: 4923 2060
+
+  %p
+    %strong Alcohol &amp; Other Drug Services
+
+  %p
+    %strong Contact Information
+    %br
+    Phone: 1800 422 599
+
+  %p
+    %strong
+      Calvary Mater Newcastle Hospital Emergency Department or John Hunter
+      Hospital Emergency Department
+
+  %p
+    %strong Contact Information
+    %br
+    Phone: 4921 1211
+
+  %p
+    %strong Drug &amp; Alcohol Clinical Service
+
+  %p
+    %strong Contact Information
+    %br
+    Phone: 4016 4588
+
+.contact
+  %h3
+    %a{:href => "http://www.holyoake.org.au/"}<
+      Holyoake Australian Institute for Alcohol and Drug Addiction Resolutions
+
+  %p
+    Holyoake offers a wide range of services and programs to support young
+    people who are using alcohol and other drugs, as well as support for their
+    family members.
+
+  %p
+    %strong Contact Information
+    %br
+    Phone: 9904 2700
+    %br
+    Email:
+    %a{:href => "mailto:holyoake@centacare.org"} holyoake@centacare.org
+
+.contact
+  %h3 Lakeview Non-Medical Detoxification Service at Belmont District Hospital
+
+  %p
+    A residential facility offering a supportive, safe environment for people
+    16 years and over who wish to detoxify from alcohol and other drugs and who
+    have no concurrent medical problems. This service is provided by the
+    Hunter/New England Area Health Service.
+
+  %p
+    %strong Contact Information
+    %br
+    Phone: 4923 2063
+
+.contact
+  %h3 Salvation Army Lake Macquarie
+
+  %p
+    Serving youth age 12-25 and their families through one on one case
+    management and group services.
+
+  %p
+    %strong Contact Information
+    %br
+    Phone: 4961 1257
+
+.contact
+  %h3
+    %a{:href => "http://www.counsellingonline.org.au/en/"}<
+      Turning Point Alcohol and Drug Centre
+
+  %p
+    %strong Contact Information
+    %br
+    Phone: 1800 888 236
+    %br
+    Email:
+    %a{:href => "mailto:CounsellingOnline@turningpoint.org"}
+      CounsellingOnline@turningpoint.org
+
+- form_tag save_url(:page => 12, :key => @participant.key) do
+  = render :partial => "continue"
