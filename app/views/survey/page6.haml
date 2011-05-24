@@ -16,5 +16,69 @@
     %p
       #{i + 1}. #{@question.text}
       %br
-      = render :partial => "answer"
+      - if i == 2 || i == 3
+        %label
+          = radio_button_tag "metric_#{i}", "yes", true
+          Metric
+        %label
+          = radio_button_tag "metric_#{i}", "no"
+          Imperial
+        %br
+        %span{:id => "metric_#{i}"}
+          = text_field "answer[]", "value", :size => "3"
+          = i == 2 ? "cm" : "kg"
+        %span{:id => "imperial_#{i}"}
+          - if i == 2
+            = select_tag "feet", options_for_select(%w{3 4 5 6 7})
+            ft.
+            = select_tag "inches", options_for_select(("0".."12").to_a)
+            in.
+          - else
+            = text_field_tag "pounds", nil, :size => "3"
+            lbs.
+      - else
+        = render :partial => "answer"
   = render :partial => "continue"
+
+:javascript
+  function toggleMetric()
+  {
+    if ($('#metric_2_yes')[0].checked)
+    {
+      $('#metric_2').show();
+      $('#imperial_2').hide();
+    }
+    else
+    {
+      $('#metric_2').hide();
+      $('#imperial_2').show();
+    }
+    if ($('#metric_3_yes')[0].checked)
+    {
+      $('#metric_3').show();
+      $('#imperial_3').hide();
+    }
+    else
+    {
+      $('#metric_3').hide();
+      $('#imperial_3').show();
+    }
+  }
+
+  function convertHeight()
+  {
+    iheight = $('#feet')[0].value * 12;
+    iheight += $('#inches')[0].value * 1; // Multiply by 1 to ensure numeric value
+    $('#answer_#{@answers[2].id}_value')[0].value = iheight * 2.54;
+  }
+
+  function convertWeight()
+  {
+    iweight = $('#pounds')[0].value * 0.45;
+    $('#answer_#{@answers[3].id}_value')[0].value = iweight;
+  }
+
+  toggleMetric();
+  $('input:radio').bind('click', toggleMetric);
+  $('#feet,#inches').bind('change', convertHeight);
+  $('#pounds').bind('change', convertWeight);
