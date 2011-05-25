@@ -24,6 +24,6 @@ Hoap::Application.configure do
   config.action_dispatch.best_standards_support = :builtin
 
   # Load jQuery and jQuery UI.
-  config.action_view.javascript_expansions[:defaults] = %w(jquery jquery-ui rails)
+  config.action_view.javascript_expansions[:defaults] = %w(jquery jquery-ui jquery.validate rails)
 end
 

@@ -35,7 +35,7 @@ Hoap::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Load minified versions of jQuery and jQuery UI in production
-  config.action_view.javascript_expansions[:defaults] = %w(jquery.min jquery-ui.min rails)
+  config.action_view.javascript_expansions[:defaults] = %w(jquery.min jquery-ui.min jquery.validate.min rails)
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
