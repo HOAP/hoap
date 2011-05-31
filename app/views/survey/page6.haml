@@ -25,7 +25,7 @@
           Imperial
         %br
         %span{:id => "metric_#{i}"}
-          = text_field "answer[]", "value", :size => "3"
+          = text_field "answer[]", "value", :size => "3", :class => "required"
           = i == 2 ? "cm" : "kg"
         %span{:id => "imperial_#{i}"}
           - if i == 2

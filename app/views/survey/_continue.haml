@@ -8,3 +8,10 @@
 
 %div{:style => "width: 100%; margin-bottom: 2em; text-align: right;"}
   = submit_tag 'Continue »'
+
+#dialog-confirm{:title => "Missed Questions"}
+  %p
+    %span{:class => "ui-icon ui-icon-alert", :style => "float:left; margin:0 7px 20px 0;"}
+
+:javascript
+  configureCheck();
