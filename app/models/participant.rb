@@ -46,9 +46,26 @@ class Participant < ActiveRecord::Base
   # Increment the current page, and save.
   # If the end is reached, automatically sets completed to true.
   def next_page!
-    self.page += 1
     if self.page > Question.count(:page, :distinct => true)
       self.completed = true
+    end
+    self.page += 1
+    # Skip pages when answering no to Question on page 3 or 5
+    if self.page == 4
+      answer = Answer.where(:participant_id => self.id, :page => 3).select(:value).first
+      if answer.value =~ /no/i
+        self.page = 8
+      end
+    elsif self.page == 6
+      answer = Answer.where(:participant_id => self.id, :page => 5).select(:value).first
+      if answer.value =~ /no/i
+        self.page = 8
+      end
+    elsif self.page == 9
+      answers = Answer.where(:participant_id => self.id, :page => [3,5]).select(:value)
+      if answers.any? { |a| a.value =~ /no/i }
+        self.page = 13
+      end
     end
     self.save
   end

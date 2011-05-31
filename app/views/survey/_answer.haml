@@ -1,11 +1,11 @@
 = hidden_field "answer[]", "question_id"
 - case @question.atype
 - when "S"
-  = select "answer[]", "value", @question.values, :include_blank => true
+  = select "answer[]", "value", @question.values, {:include_blank => true}, {:class => "required"}
 - when "R"
   - @question.values.each do |opt|
     %label
-      = radio_button "answer[]", "value", opt
+      = radio_button "answer[]", "value", opt, :class => "required"
       = opt
 - when "T"
-  = text_field "answer[]", "value"
+  = text_field "answer[]", "value", :class => "required"
