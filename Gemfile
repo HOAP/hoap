@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.6'
+gem 'rails', '3.0.7'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -24,7 +24,7 @@ gem 'pg'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 # gem 'aws-s3', :require => 'aws/s3'
 gem 'haml'
-gem 'jquery-rails', '>= 0.2.6'
+gem 'jquery-rails', '>= 1.0.9'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
