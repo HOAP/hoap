@@ -13,6 +13,10 @@ Hoap::Application.routes.draw do
 
   resource :user_session
 
+  get "users/index"
+
+  resources :users
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
