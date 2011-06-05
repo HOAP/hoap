@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_filter :require_admin_user, :only => [:index]
 
   def index
+    @users = User.select("id, login, email, admin, last_login_at")
   end
 
   def new
