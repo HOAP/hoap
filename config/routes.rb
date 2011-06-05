@@ -11,6 +11,8 @@ Hoap::Application.routes.draw do
 
   match "survey/feedback/:page/:key" => 'survey#feedback', :as => :feedback
 
+  resource :user_session
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
