@@ -7,7 +7,7 @@
     Thanks #{@participant.name},
   first of all we’d like to know a few things about you:
 
-- form_tag save_url(:page => 2, :key => @participant.key) do
+= form_tag save_url(:page => 2, :key => @participant.key) do
   - @questions.length.times do |i|
     - @question, @answer = @questions[i], @answers[i]
     %p

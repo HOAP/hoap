@@ -8,7 +8,7 @@
   In answering these questions, think about your use of alcohol in the last 4
   weeks and select the answer that’s most appropriate to you.
 
-- form_tag save_url(:page => 7, :key => @participant.key) do
+= form_tag save_url(:page => 7, :key => @participant.key) do
   %table
     - @questions.length.times do |i|
       - @question, @answer = @questions[i], @answers[i]
