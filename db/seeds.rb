@@ -62,3 +62,5 @@ pages.each do |page|
     Question.create(question)
   end
 end
+
+User.create(:login => "tony", :email => "tony@agrav.net", :password => "default", :password_confirmation => "default", :admin => true)
