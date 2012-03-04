@@ -121,8 +121,7 @@ class Participant < ActiveRecord::Base
   def money
     if self.c_money.nil?
       dpy = self.dpw * 52
-      # TODO: get correct minimum and maximum dollar value per drink.
-      self.c_money = [dpy * 1.5, dpy * 6.5]
+      self.c_money = [dpy * 1.5, dpy * 6.0]
       self.save
     end
     self.c_money
