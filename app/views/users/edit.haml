@@ -1,0 +1,11 @@
+- if @user.id == @current_user.id
+  %h1 Edit My Account
+- else
+  %h1 Edit #{@user.login.capitalize}'s Account
+
+= form_for @user do |f| 
+  = render :partial => "form", :object => f 
+  = f.submit "Update" 
+
+%br
+= link_to "Back", @user

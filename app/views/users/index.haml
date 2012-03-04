@@ -1,0 +1,14 @@
+%h1 Users
+
+%table{:style => "margin-left: auto; margin-right: auto;", :border => "1"}
+  %tr
+    %th User
+    %th Email
+    %th Admin
+    %th Last Login
+  - @users.each do |user|
+    %tr
+      %td= link_to user.login, user
+      %td= user.email
+      %td{:style => "text-align: center;"}!= user.admin ? "&#x2713;" : ""
+      %td= user.last_login_at

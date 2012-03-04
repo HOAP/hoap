@@ -25,6 +25,8 @@ gem 'pg'
 # gem 'aws-s3', :require => 'aws/s3'
 gem 'haml'
 gem 'jquery-rails', '>= 1.0.9'
+gem 'bcrypt-ruby', '>= 2.1.4'
+gem 'authlogic', '3.0.3'
 
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
