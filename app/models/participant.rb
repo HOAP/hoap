@@ -61,11 +61,6 @@ class Participant < ActiveRecord::Base
       if answer.value =~ /no/i
         self.page = 8
       end
-    elsif self.page == 9
-      answers = Answer.where(:participant_id => self.id, :page => [3,5]).select(:value)
-      if answers.any? { |a| a.value =~ /no/i }
-        self.page = 13
-      end
     end
     self.save
   end

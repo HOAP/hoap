@@ -11,6 +11,12 @@ Hoap::Application.routes.draw do
 
   match "survey/feedback/:page/:key" => 'survey#feedback', :as => :feedback
 
+  match "facts/:key" => 'survey#facts', :as => :facts
+
+  match "tips/:key" => 'survey#tips', :as => :tips
+
+  match "support/:key" => 'survey#support', :as => :support
+
   resource :user_session
 
   get "users/index"

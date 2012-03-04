@@ -1,5 +1,5 @@
 class SurveyController < ApplicationController
-  before_filter :get_participant, :only => [:page, :save, :feedback]
+  before_filter :get_participant, :except => [:index, :start]
 
   def index
   end
@@ -42,6 +42,15 @@ class SurveyController < ApplicationController
   end
 
   def feedback
+  end
+
+  def facts
+  end
+
+  def tips
+  end
+
+  def support
   end
 
   private
