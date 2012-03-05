@@ -129,9 +129,29 @@ class Participant < ActiveRecord::Base
 
   def bac
     if self.c_bac.nil?
-      # TODO: find correct method of calculating BAC.
-      self.c_bac = 0.13
+      # Get the values of the Answers needed for the calculation
+      reqd_answers = Answer.where(:participant_id => self.id, :page => 6).pluck(:value)
+      reqd_answers += Answer.where(:participant_id => self.id, :page => 2).pluck(:value)
+      # Number of Standard Drinks
+      sd = reqd_answers[0].to_i
+      # Body Water constant
+      bw = 0.58 # Males
+      if reqd_answers[4] == "Female"
+        bw = 0.49
+      end
+      # Weight
+      wt = reqd_answers[3].to_f
+      # Metabolism Rate
+      if self.audit <= 7
+        mr = 0.017
+      else
+        mr = 0.02
+      end
+      # Drinking Period
+      dp = reqd_answers[1].to_i
+      self.c_bac = ((0.806 * sd) / ((bw * wt) - (mr * dp))).round(2)
+      self.save
     end
-    self.c_bac
+    self.c_bac.to_f
   end
 end
