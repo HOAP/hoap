@@ -28,7 +28,7 @@ class SurveyController < ApplicationController
     @participant.update_progress(params[:page])
     if @participant.page == 1
       @participant.update_attributes(params[:participant])
-      error_count = @participant.errors.length
+      error_count = @participant.errors.count
     else
       @answers, error_count = Answer.save_all(params[:answer])
     end

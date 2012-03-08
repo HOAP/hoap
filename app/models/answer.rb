@@ -21,7 +21,7 @@ class Answer < ActiveRecord::Base
       params.each do |id, line|
         ans = Answer.find(id)
         ans.update_attributes(line)
-        error_count += ans.errors.length
+        error_count += ans.errors.count
         answers << ans
       end
     end
