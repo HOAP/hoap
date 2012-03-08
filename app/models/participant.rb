@@ -52,12 +52,12 @@ class Participant < ActiveRecord::Base
     self.page += 1
     # Skip pages when answering no to Question on page 3 or 5
     if self.page == 4
-      answer = Answer.where(:participant_id => self.id, :page => 3).select(:value).first
+      answer = Answer.where(:participant_id => self.id, :page => 3).order("id ASC").select(:value).first
       if answer.value =~ /no/i
         self.page = 8
       end
     elsif self.page == 6
-      answer = Answer.where(:participant_id => self.id, :page => 5).select(:value).first
+      answer = Answer.where(:participant_id => self.id, :page => 5).order("id ASC").select(:value).first
       if answer.value =~ /no/i
         self.page = 8
       end
@@ -130,8 +130,8 @@ class Participant < ActiveRecord::Base
   def bac
     if self.c_bac.nil?
       # Get the values of the Answers needed for the calculation
-      reqd_answers = Answer.where(:participant_id => self.id, :page => 6).pluck(:value)
-      reqd_answers += Answer.where(:participant_id => self.id, :page => 2).pluck(:value)
+      reqd_answers = Answer.where(:participant_id => self.id, :page => 6).order("id ASC").pluck(:value)
+      reqd_answers += Answer.where(:participant_id => self.id, :page => 2).order("id ASC").pluck(:value)
       # Number of Standard Drinks
       sd = reqd_answers[0].to_i
       # Body Water constant
