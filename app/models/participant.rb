@@ -119,7 +119,7 @@ class Participant < ActiveRecord::Base
   end
 
   def money
-    if self.c_money.nil?
+    if self.c_money.empty?
       dpy = self.dpw * 52
       self.c_money = [dpy * 1.5, dpy * 6.0]
       self.save
