@@ -9,69 +9,72 @@
 
 %h3 Your Alcohol Use
 
-%table.audit
-  %tr{:class => audit_class(@participant.audit, 0)}
-    %td.level
-      0-7
-    %td.text
-      Moderate
-      %br
-      Drinking
-  %tr{:class => audit_class(@participant.audit, 1)}
-    %td.level
-      8-14
-    %td.text
-      Hazardous
-      %br
-      Drinking
-  %tr{:class => audit_class(@participant.audit, 2)}
-    %td.level
-      15-19
-    %td.text
-      Harmful
-      %br
-      Drinking
-  %tr{:class => audit_class(@participant.audit, 3)}
-    %td.level
-      20-40
-    %td.text
-      Alcohol
-      %br
-      Dependence
+%table
+  %tr
+    %td{:valign => "top"}
+      %table.audit
+        %tr{:class => audit_class(@participant.audit, 0)}
+          %td.level
+            0-7
+          %td.text
+            Moderate
+            %br
+            Drinking
+        %tr{:class => audit_class(@participant.audit, 1)}
+          %td.level
+            8-14
+          %td.text
+            Hazardous
+            %br
+            Drinking
+        %tr{:class => audit_class(@participant.audit, 2)}
+          %td.level
+            15-19
+          %td.text
+            Harmful
+            %br
+            Drinking
+        %tr{:class => audit_class(@participant.audit, 3)}
+          %td.level
+            20-40
+          %td.text
+            Alcohol
+            %br
+            Dependence
+    %td
+      %p
+        Some of the questions you answered regarding your drinking come from the
+        Alcohol Use Disorders Identification Test, a questionnaire developed by the
+        World Health Organisation to determine whether a person's drinking might be
+        becoming problematic.
 
-%p
-  Some of the questions you answered regarding your drinking come from the
-  Alcohol Use Disorders Identification Test, a questionnaire developed by the
-  World Health Organisation to determine whether a person's drinking might be
-  becoming problematic.
+      %p.audit_level
+        Your AUDIT score was
+        %span.report= @participant.audit
 
-%p.audit_level
-  Your AUDIT score was
-  %span.report= @participant.audit
+      %p{:class => audit_class(@participant.audit, 0)}
+        MODERATE DRINKING (0-7) Low risk of alcohol related harm.
 
-%p{:class => audit_class(@participant.audit, 0)}
-  MODERATE DRINKING (0-7) Low risk of alcohol related harm.
+      %p{:class => audit_class(@participant.audit, 1)}
+        HAZARDOUS DRINKING (8-14) High risk of experiencing alcohol related harm and
+        some people in this range may already be experiencing significant harm.
 
-%p{:class => audit_class(@participant.audit, 1)}
-  HAZARDOUS DRINKING (8-14) High risk of experiencing alcohol related harm and
-  some people in this range may already be experiencing significant harm.
+      %p{:class => audit_class(@participant.audit, 2)}
+        HARMFUL DRINKING (15-19) A person scoring in this range will already be
+        experiencing significant alcohol related harm.
 
-%p{:class => audit_class(@participant.audit, 2)}
-  HARMFUL DRINKING (15-19) A person scoring in this range will already be
-  experiencing significant alcohol related harm.
+      %p{:class => audit_class(@participant.audit, 3)}
+        ALCOHOL DEPENDENCE (20-40) A person scoring in this range may be alcohol
+        dependent and advised to have a clinical assessment of their drinking. To
+        find out some services that might be useful go to the
+        = link_to 'SUPPORT', support_path(@participant.key)
+        page.
 
-%p{:class => audit_class(@participant.audit, 3)}
-  ALCOHOL DEPENDENCE (20-40) A person scoring in this range may be alcohol
-  dependent and advised to have a clinical assessment of their drinking. To
-  find out some services that might be useful go to the
-  = link_to 'SUPPORT', support_path(@participant.key)
-  page.
-
-%p
-  The main way to reduce your risk level (and AUDIT score) is to reduce the
-  number of drinks you consume per occasion. You may like to check out the
-  = link_to 'TIPS', tips_path(@participant.key)
-  section for ideas on reducing your consumption.
+      %p
+        The main way to reduce your risk level (and AUDIT score) is to reduce the
+        number of drinks you consume per occasion. You may like to check out the
+        = link_to 'TIPS', tips_path(@participant.key)
+        section for ideas on reducing your consumption.
 
 %h3 Your Blood Alcohol Content
 
@@ -113,16 +116,16 @@
 %p
   You reported having approximately #{@participant.typical_drinks} drinks on a
   typical occasion. The graph on the right shows how this compares to medical
-  guidlines<sup>1</sup> and to other people your age and sex<sup>2</sup>.
+  guidelines<sup>1</sup> and to other people your age and sex<sup>2</sup>.
 
 %ol.footnote
+  %li
+    National Health and Medical Research Council (NHMRC). Australian guidelines
+    to reduce health risks from drinking alcohol. Canberra: NHMRC; 2009.
   %li
     Australian Institute of Health and Welfare (AIHW). 2007 National Drug
     Strategy Household Survey: detailed results. Drug Statistics Series number
     22. Cat. no. PHE 107. Canberra: AIHW; 2008.
-  %li
-    National Health and Medical Research Council (NHMRC). Australian guidelines
-    to reduce health risks from drinking alcohol. Canberra: NHMRC; 2009.
 
 %h4 Standard Drinks Consumed Per Week
 

@@ -140,9 +140,8 @@ table.partlist td, th {
 
 /* Styles for feedback pages */
 table.audit {
-  float: left;
-  margin-right: 2em;
-  margin-bottom: 2em;
+  width: 170px;
+  margin-top: 2em;
   border-collapse: separate;
 }
 td.level {
