@@ -23,4 +23,32 @@ module SurveyHelper
       "&hellip;alcohol will almost certainly be causing you problems with a score above 19. You have significantly impaired control over your drinking and are likely to be dependent on alcohol to an extent that may well be difficult to change without help. Do something about it."
     end
   end
+
+  def get_speedo(bac)
+    if (bac < 0.02)
+      ""
+    elsif (bac < 0.05)
+      "speedometer1.png"
+    elsif (bac < 0.10)
+      "speedometer2.png"
+    elsif (bac < 0.15)
+      "speedometer3.png"
+    else
+      "speedometer4.png"
+    end
+  end
+
+  def get_speedo_alt(bac)
+    if (bac < 0.02)
+      ""
+    elsif (bac <= 0.04)
+      "At a blood alcohol level between 0.02-0.04 you are 1.4 times more likely to be killed in a single vehicle accident."
+    elsif (bac <= 0.09)
+      "At a blood alcohol level between 0.05-0.09 you are 11 times more likely to be killed in a single vehicle accident."
+    elsif (bac <= 0.14)
+      "At a blood alcohol level between 0.10-0.14 you are 48 times more likely to be killed in a single vehicle accident."
+    else
+      "At a blood alcohol level of 0.15 and above you are 380 times more likely to be killed in a single vehicle accident."
+    end
+  end
 end

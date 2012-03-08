@@ -75,21 +75,26 @@
 
 %h3 Your Blood Alcohol Content
 
-%p
-  Your estimated Blood Alcohol Content (BAC) for your heaviest drinking
-  occasion is
-  %span.report #{@participant.bac}%
+%table
+  %tr
+    %td
+      %p
+        Your estimated Blood Alcohol Content (BAC) for your heaviest drinking
+        occasion is
+        %span.report #{@participant.bac}%
 
-%p
-  Some of the questions you answered regarding your drinking come from the
-  Alcohol Use Disorders Identification Test, a questionnaire developed by the
-  World Health Organisation to determine whether a person's drinking might be
-  becoming problematic.
+      %p
+        Some of the questions you answered regarding your drinking come from the
+        Alcohol Use Disorders Identification Test, a questionnaire developed by the
+        World Health Organisation to determine whether a person's drinking might be
+        becoming problematic.
 
-%p
-  This estimate takes into account you gender, weight, the number of standard
-  drinks consumed and the number of hours over which you reported drinking this
-  amount.
+      %p
+        This estimate takes into account you gender, weight, the number of standard
+        drinks consumed and the number of hours over which you reported drinking this
+        amount.
+    %td
+      = image_tag get_speedo(@participant.bac), :alt => get_speedo_alt(@participant.bac), :size => "300x300"
 
 %h3 Your Money
 
