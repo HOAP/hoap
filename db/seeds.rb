@@ -31,29 +31,29 @@ pages = [
     {:page => 5, :text => "Have you had a drink containing alcohol in the <strong>LAST 4 WEEKS</strong>?", :atype => "R", :values => %w{Yes No}}
   ],
   [
-    {:page => 6, :text => "In the LAST 4 WEEKS what is the largest number of Standard Drinks you have consumed on a single occasion?", :atype => "S", :values => {"1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5", "6" => "6", "7" => "7", "8" => "8", "9" => "9", "10" => "10", "11" => "11", "12" => "12", "13" => "13", "14" => "14", "15" => "15", "16" => "16", "17" => "17", "18" => "18", "19" => "19", "20" => "20", "21" => "21", "22" => "22", "23" => "23", "24" => "24", "25-29" => "27", "30-34" => "32", "35-39" => "37", "40-44" => "42", "45-49" => "47", "50 or more" => "50"}},
+    {:page => 6, :text => "In the LAST 4 WEEKS what is the largest number of Standard Drinks you have consumed on a single occasion?", :atype => "S", :values => [["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10", "10"], ["11", "11"], ["12", "12"], ["13", "13"], ["14", "14"], ["15", "15"], ["16", "16"], ["17", "17"], ["18", "18"], ["19", "19"], ["20", "20"], ["21", "21"], ["22", "22"], ["23", "23"], ["24", "24"], ["25-29", "27"], ["30-34", "32"], ["35-39", "37"], ["40-44", "42"], ["45-49", "47"], ["50 or more", "50"]]},
     {:page => 6, :text => "Over how many hours did you drink this amount (to the nearest hour)?", :atype => "S", :values => ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"]},
     {:page => 6, :text => "Height", :atype => "T"},
     {:page => 6, :text => "Weight", :atype => "T"}
   ],
   [
-    {:page => 7, :text => "Do you find your self thinking about when you will next be able to have another drink?", :atype => "S", :values => {"Never" => "0", "Sometimes" => "1", "Often" => "2", "Nearly always" => "3"}},
-    {:page => 7, :text => "Is drinking more important than anything else you might do during the day?", :atype => "S", :values => {"Never" => "0", "Sometimes" => "1", "Often" => "2", "Nearly always" => "3"}},
-    {:page => 7, :text => "Do you feel your need for drink is too strong to control?", :atype => "S", :values => {"Never" => "0", "Sometimes" => "1", "Often" => "2", "Nearly always" => "3"}},
-    {:page => 7, :text => "Do you plan your days around getting drink and drinking?", :atype => "S", :values => {"Never" => "0", "Sometimes" => "1", "Often" => "2", "Nearly always" => "3"}},
-    {:page => 7, :text => "Do you drink in a particular way in order to increase the effect it gives you?", :atype => "S", :values => {"Never" => "0", "Sometimes" => "1", "Often" => "2", "Nearly always" => "3"}},
-    {:page => 7, :text => "Do you drink morning, afternoon and evening?", :atype => "S", :values => {"Never" => "0", "Sometimes" => "1", "Often" => "2", "Nearly always" => "3"}},
-    {:page => 7, :text => "Do you feel you have to carry on drinking once you have started?", :atype => "S", :values => {"Never" => "0", "Sometimes" => "1", "Often" => "2", "Nearly always" => "3"}},
-    {:page => 7, :text => "Is getting the effect you want more important than the particular drink you use?", :atype => "S", :values => {"Never" => "0", "Sometimes" => "1", "Often" => "2", "Nearly always" => "3"}},
-    {:page => 7, :text => "Do you want to drink more when the effect starts to wear off?", :atype => "S", :values => {"Never" => "0", "Sometimes" => "1", "Often" => "2", "Nearly always" => "3"}},
-    {:page => 7, :text => "Do you find it difficult to cope with life without drink?", :atype => "S", :values => {"Never" => "0", "Sometimes" => "1", "Often" => "2", "Nearly always" => "3"}}
+    {:page => 7, :text => "Do you find your self thinking about when you will next be able to have another drink?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
+    {:page => 7, :text => "Is drinking more important than anything else you might do during the day?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
+    {:page => 7, :text => "Do you feel your need for drink is too strong to control?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
+    {:page => 7, :text => "Do you plan your days around getting drink and drinking?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
+    {:page => 7, :text => "Do you drink in a particular way in order to increase the effect it gives you?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
+    {:page => 7, :text => "Do you drink morning, afternoon and evening?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
+    {:page => 7, :text => "Do you feel you have to carry on drinking once you have started?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
+    {:page => 7, :text => "Is getting the effect you want more important than the particular drink you use?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
+    {:page => 7, :text => "Do you want to drink more when the effect starts to wear off?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
+    {:page => 7, :text => "Do you find it difficult to cope with life without drink?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]}
   ],
   [
-    {:page => 8, :text => "Have you had any fractures or dislocations to your bones or joints?", :atype => "S", :values => {"Yes" => "1", "No" => "0", "Prefer not to answer" => "9"}},
-    {:page => 8, :text => "Have you been injured in a road traffic accident?", :atype => "S", :values => {"Yes" => "1", "No" => "0", "Prefer not to answer" => "9"}},
-    {:page => 8, :text => "Have you injured your head?", :atype => "S", :values => {"Yes" => "1", "No" => "0", "Prefer not to answer" => "9"}},
-    {:page => 8, :text => "Have you been injured in an assault or fight (excluding injuries during sports)?", :atype => "S", :values => {"Yes" => "1", "No" => "0", "Prefer not to answer" => "9"}},
-    {:page => 8, :text => "Have you been injured after drinking?", :atype => "S", :values => {"Yes" => "1", "No" => "0", "Prefer not to answer" => "9"}}
+    {:page => 8, :text => "Have you had any fractures or dislocations to your bones or joints?", :atype => "S", :values => [["Yes", "1"], ["No", "0"], ["Prefer not to answer", "9"]]},
+    {:page => 8, :text => "Have you been injured in a road traffic accident?", :atype => "S", :values => [["Yes", "1"], ["No", "0"], ["Prefer not to answer", "9"]]},
+    {:page => 8, :text => "Have you injured your head?", :atype => "S", :values => [["Yes", "1"], ["No", "0"], ["Prefer not to answer", "9"]]},
+    {:page => 8, :text => "Have you been injured in an assault or fight (excluding injuries during sports)?", :atype => "S", :values => [["Yes", "1"], ["No", "0"], ["Prefer not to answer", "9"]]},
+    {:page => 8, :text => "Have you been injured after drinking?", :atype => "S", :values => [["Yes", "1"], ["No", "0"], ["Prefer not to answer", "9"]]}
   ]
 ]
 
