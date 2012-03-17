@@ -109,40 +109,49 @@
   %span.report= number_to_currency @participant.money[1]
   on alcohol in the last year.
 
-%h3 Your Drinking Amount Compared
+- if @participant.display_dpo? || @participant.display_dpw?
+  %h3 Your Drinking Amount Compared
 
-%h4 Standard Drinks Consumed Per Occaision
+  - if @participant.display_dpo?
+    %h4 Standard Drinks Consumed Per Occaision
 
-%p
-  You reported having approximately #{@participant.typical_drinks} drinks on a
-  typical occasion. The graph on the right shows how this compares to medical
-  guidelines<sup>1</sup> and to other people your age and sex<sup>2</sup>.
+    %div{:style => "text-align: center;"}
+      = image_tag dpo_graph_url, :alt => "Average Number of Standard Drinks"
 
-%ol.footnote
-  %li
-    National Health and Medical Research Council (NHMRC). Australian guidelines
-    to reduce health risks from drinking alcohol. Canberra: NHMRC; 2009.
-  %li
-    Australian Institute of Health and Welfare (AIHW). 2007 National Drug
-    Strategy Household Survey: detailed results. Drug Statistics Series number
-    22. Cat. no. PHE 107. Canberra: AIHW; 2008.
+    %p
+      You reported having approximately #{@participant.typical_drinks} drinks on a
+      typical occasion. The graph on the right shows how this compares to medical
+      guidelines<sup>1</sup> and to other people your age and sex<sup>2</sup>.
 
-%h4 Standard Drinks Consumed Per Week
+    %ol.footnote
+      %li
+        National Health and Medical Research Council (NHMRC). Australian guidelines
+        to reduce health risks from drinking alcohol. Canberra: NHMRC; 2009.
+      %li
+        Australian Institute of Health and Welfare (AIHW). 2007 National Drug
+        Strategy Household Survey: detailed results. Drug Statistics Series number
+        22. Cat. no. PHE 107. Canberra: AIHW; 2008.
 
-%p
-  You reported consuming approximatately #{@participant.dpw} drinks per week,
-  and #{@participant.dpw * 4} drinks per month. The graph on the left shows how
-  this compares to medical guidelines<sup>1</sup> and to other people your age
-  and sex<sup>2</sup>.
+  - if @participant.display_dpw?
+    %h4 Standard Drinks Consumed Per Week
 
-%ol.footnote
-  %li
-    Australian Institute of Health and Welfare (AIHW). 2007 National Drug
-    Strategy Household Survey: detailed results. Drug Statistics Series number
-    22. Cat. no. PHE 107. Canberra: AIHW; 2008.
-  %li
-    National Health and Medical Research Council (NHMRC). Australian guidelines
-    to reduce health risks from drinking alcohol. Canberra: NHMRC; 2009.
+    %div{:style => "text-align: center;"}
+      = image_tag dpw_graph_url, :alt => "Average Number of Standard Drinks"
+
+    %p
+      You reported consuming approximatately #{@participant.dpw} drinks per week,
+      and #{@participant.dpw * 4} drinks per month. The graph on the left shows how
+      this compares to medical guidelines<sup>1</sup> and to other people your age
+      and sex<sup>2</sup>.
+
+    %ol.footnote
+      %li
+        Australian Institute of Health and Welfare (AIHW). 2007 National Drug
+        Strategy Household Survey: detailed results. Drug Statistics Series number
+        22. Cat. no. PHE 107. Canberra: AIHW; 2008.
+      %li
+        National Health and Medical Research Council (NHMRC). Australian guidelines
+        to reduce health risks from drinking alcohol. Canberra: NHMRC; 2009.
 
 %h3 Your Risk Of Alcohol Dependence
 

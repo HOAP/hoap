@@ -15,6 +15,16 @@ class Participant < ActiveRecord::Base
     14 => {"No" => 0, "Yes, but not in the last year" => 2, "Yes, during the last year" => 4}
   }
 
+  @@avg_dpo = {
+    "Male" => {"18-19" => 5.5, "20-24" => 3.5, "25-29" => 3.5, "30-34" => 3.5, "35-39" => 3.5, "40-44" => 3.5, "45-49" => 3.5, "50-54" => 3.5, "55-59" => 1.5, "60-64" => 1.5, "65-69" => 1.5, "70-74" => 1.5, "75-79" => 1.5, "80-84" => 1.5, "85+" => 1.5},
+    "Female" => {"18-19" => 3.5, "20-24" => 3.5, "25-29" => 1.5, "30-34" => 1.5, "35-39" => 1.5, "40-44" => 1.5, "45-49" => 1.5, "50-54" => 1.5, "55-59" => 1.5, "60-64" => 1.5, "65-69" => 1.5, "70-74" => 1.5, "75-79" => 1.5, "80-84" => 1.5, "85+" => 1.5}
+  }
+
+  @@avg_dpw = {
+    "Male" => {"18-19" => 5.25, "20-24" => 5.25, "25-29" => 5.25, "30-34" => 5.25, "35-39" => 5.25, "40-44" => 5.25, "45-49" => 5.25, "50-54" => 5.25, "55-59" => 5.25, "60-64" => 5.25, "65-69" => 5.25, "70-74" => 5.25, "75-79" => 5.25, "80-84" => 2.25, "85+" => 2.25},
+    "Female" => {"18-19" => 2.25, "20-24" => 2.25, "25-29" => 1.75, "30-34" => 1.75, "35-39" => 1.75, "40-44" => 2.25, "45-49" => 2.25, "50-54" => 0.875, "55-59" => 0.75, "60-64" => 0.875, "65-69" => 0.375, "70-74" => 0.375, "75-79" => 0.375, "80-84" => 0, "85+" => 0}
+  }
+
   def audit_score(question, answer)
     @@audit_values[question][answer]
   end
@@ -153,5 +163,43 @@ class Participant < ActiveRecord::Base
       self.save
     end
     self.c_bac.to_f
+  end
+
+  def display_dpo?
+    a = Answer.where(:participant_id => self.id, :page => 2).order("id ASC").limit(2).pluck(:value)
+    a += Answer.where(:participant_id => self.id, :page => 4).order("id ASC").limit(2).pluck(:value)
+    return a[3].to_i > @@avg_dpo[a[0]][a[1]]
+  end
+
+  def display_dpw?
+    a = Answer.where(:participant_id => self.id, :page => 2).order("id ASC").limit(2).pluck(:value)
+    return self.dpw > @@avg_dpw[a[0]][a[1]]
+  end
+
+  def dpo_graph
+    a = Answer.where(:participant_id => self.id, :page => 2).order("id ASC").limit(2).pluck(:value)
+    a += Answer.where(:participant_id => self.id, :page => 4).order("id ASC").limit(2).pluck(:value)
+    g = Gruff::Bar.new(400)
+    g.title = "Average Number of Standard Drinks"
+    g.data("Medical Guidlines", 4)
+    g.data("#{a[1]} year old #{a[0].downcase}s", @@avg_dpo[a[0]][a[1]])
+    g.data("Your Drinking", a[3].to_i)
+    g.sort = false
+    g.minimum_value = 0
+    g.theme_37signals
+    return g.to_blob
+  end
+
+  def dpw_graph
+    a = Answer.where(:participant_id => self.id, :page => 2).order("id ASC").limit(2).pluck(:value)
+    g = Gruff::Bar.new(400)
+    g.title = "Standard Drinks Per Week"
+    g.data("Medical Guidlines", 14)
+    g.data("#{a[1]} year old #{a[0].downcase}s", @@avg_dpw[a[0]][a[1]])
+    g.data("Your Drinking", self.dpw)
+    g.sort = false
+    g.minimum_value = 0
+    g.theme_37signals
+    return g.to_blob
   end
 end
