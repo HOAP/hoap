@@ -17,6 +17,10 @@ Hoap::Application.routes.draw do
 
   match "support/:key" => 'survey#support', :as => :support
 
+  match "survey/dpo_graph/:key" => 'survey#dpo_graph', :as => :dpo_graph
+
+  match "survey/dpw_graph/:key" => 'survey#dpw_graph', :as => :dpw_graph
+
   resource :user_session
 
   get "users/index"
