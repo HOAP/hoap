@@ -59,12 +59,14 @@ class Participant < ActiveRecord::Base
     if self.page > Question.count(:page, :distinct => true)
       self.completed = true
     end
-    self.page += 1
+    if self.page != 99
+      self.page += 1
+    end
     # Skip pages when answering no to Question on page 3 or 5
     if self.page == 4
       answer = Answer.where(:participant_id => self.id, :page => 3).order("id ASC").select(:value).first
       if answer.value =~ /no/i
-        self.page = 8
+        self.page = 99
       end
     elsif self.page == 6
       answer = Answer.where(:participant_id => self.id, :page => 5).order("id ASC").select(:value).first
