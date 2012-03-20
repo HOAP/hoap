@@ -182,7 +182,9 @@ class Participant < ActiveRecord::Base
     g = Gruff::Bar.new(400)
     g.title = "Average Number of Standard Drinks"
     g.data("Medical Guidlines", 4)
-    g.data("#{a[1]} year old #{a[0].downcase}s", @@avg_dpo[a[0]][a[1]])
+    if (a[3].to_i >= @@avg_dpo[a[0]][a[1]])
+      g.data("#{a[1]} year old #{a[0].downcase}s", @@avg_dpo[a[0]][a[1]])
+    end
     g.data("Your Drinking", a[3].to_i)
     g.sort = false
     g.minimum_value = 0
@@ -195,7 +197,9 @@ class Participant < ActiveRecord::Base
     g = Gruff::Bar.new(400)
     g.title = "Standard Drinks Per Week"
     g.data("Medical Guidlines", 14)
-    g.data("#{a[1]} year old #{a[0].downcase}s", @@avg_dpw[a[0]][a[1]])
+    if (self.dpw >= @@avg_dpw[a[0]][a[1]])
+      g.data("#{a[1]} year old #{a[0].downcase}s", @@avg_dpw[a[0]][a[1]])
+    end
     g.data("Your Drinking", self.dpw)
     g.sort = false
     g.minimum_value = 0
