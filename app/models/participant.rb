@@ -168,12 +168,12 @@ class Participant < ActiveRecord::Base
   def display_dpo?
     a = Answer.where(:participant_id => self.id, :page => 2).order("id ASC").limit(2).pluck(:value)
     a += Answer.where(:participant_id => self.id, :page => 4).order("id ASC").limit(2).pluck(:value)
-    return a[3].to_i > @@avg_dpo[a[0]][a[1]]
+    return a[3].to_i > 4
   end
 
   def display_dpw?
     a = Answer.where(:participant_id => self.id, :page => 2).order("id ASC").limit(2).pluck(:value)
-    return self.dpw > @@avg_dpw[a[0]][a[1]]
+    return self.dpw > 14
   end
 
   def dpo_graph
