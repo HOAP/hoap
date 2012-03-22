@@ -172,6 +172,7 @@ tr.audit_level td.text {
   color: #222;
 }
 p.audit_level {
+  padding: 5px;
   font-weight: bold;
 }
 span.report {
@@ -179,4 +180,24 @@ span.report {
 }
 .footnote {
   font-size: 80%;
+}
+
+p.a0 {
+  background-color: #8CEC89;
+  border: 1px solid #10570e;
+}
+
+p.a1 {
+  background-color: #E9FC8D;
+  border: 1px solid #a7c905;
+}
+
+p.a2 {
+  background-color: #FFDE8E;
+  border: 1px solid #d29500;
+}
+
+p.a3 {
+  background-color: #FFAA8E;
+  border: 1px solid #c13000;
 }

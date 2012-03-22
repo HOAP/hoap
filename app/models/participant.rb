@@ -59,12 +59,14 @@ class Participant < ActiveRecord::Base
     if self.page > Question.count(:page, :distinct => true)
       self.completed = true
     end
-    self.page += 1
+    if self.page != 99
+      self.page += 1
+    end
     # Skip pages when answering no to Question on page 3 or 5
     if self.page == 4
       answer = Answer.where(:participant_id => self.id, :page => 3).order("id ASC").select(:value).first
       if answer.value =~ /no/i
-        self.page = 8
+        self.page = 99
       end
     elsif self.page == 6
       answer = Answer.where(:participant_id => self.id, :page => 5).order("id ASC").select(:value).first
@@ -168,12 +170,12 @@ class Participant < ActiveRecord::Base
   def display_dpo?
     a = Answer.where(:participant_id => self.id, :page => 2).order("id ASC").limit(2).pluck(:value)
     a += Answer.where(:participant_id => self.id, :page => 4).order("id ASC").limit(2).pluck(:value)
-    return a[3].to_i > @@avg_dpo[a[0]][a[1]]
+    return a[3].to_i > 4
   end
 
   def display_dpw?
     a = Answer.where(:participant_id => self.id, :page => 2).order("id ASC").limit(2).pluck(:value)
-    return self.dpw > @@avg_dpw[a[0]][a[1]]
+    return self.dpw > 14
   end
 
   def dpo_graph
@@ -182,7 +184,9 @@ class Participant < ActiveRecord::Base
     g = Gruff::Bar.new(400)
     g.title = "Average Number of Standard Drinks"
     g.data("Medical Guidlines", 4)
-    g.data("#{a[1]} year old #{a[0].downcase}s", @@avg_dpo[a[0]][a[1]])
+    if (a[3].to_i >= @@avg_dpo[a[0]][a[1]])
+      g.data("#{a[1]} year old #{a[0].downcase}s", @@avg_dpo[a[0]][a[1]])
+    end
     g.data("Your Drinking", a[3].to_i)
     g.sort = false
     g.minimum_value = 0
@@ -195,11 +199,18 @@ class Participant < ActiveRecord::Base
     g = Gruff::Bar.new(400)
     g.title = "Standard Drinks Per Week"
     g.data("Medical Guidlines", 14)
-    g.data("#{a[1]} year old #{a[0].downcase}s", @@avg_dpw[a[0]][a[1]])
+    if (self.dpw >= @@avg_dpw[a[0]][a[1]])
+      g.data("#{a[1]} year old #{a[0].downcase}s", @@avg_dpw[a[0]][a[1]])
+    end
     g.data("Your Drinking", self.dpw)
     g.sort = false
     g.minimum_value = 0
     g.theme_37signals
     return g.to_blob
+  end
+
+  def audit_only?
+    a = Answer.where(:participant_id => self.id, :page => 5).pluck(:value)
+    return a[0] == "No"
   end
 end

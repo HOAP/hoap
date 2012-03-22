@@ -76,103 +76,104 @@
         = link_to 'TIPS', tips_path(@participant.key)
         section for ideas on reducing your consumption.
 
-%h3 Your Blood Alcohol Content
+- unless @participant.audit_only?
+  %h3 Your Blood Alcohol Content
 
-%table
-  %tr
-    %td
+  %table
+    %tr
+      %td
+        %p
+          Your estimated Blood Alcohol Content (BAC) for your heaviest drinking
+          occasion is
+          %span.report #{@participant.bac}%
+
+        %p
+          Your BAC is an indication of how intoxicated you are, with a higher BAC
+          corresponding with a greater likelihood of experiencing alcohol-related
+          harm, especially when driving.
+
+        %p
+          This estimate takes into account your gender, weight, the number of
+          standard drinks consumed and the number of hours over which you
+          reported drinking this amount.
+
+      %td
+        = image_tag get_speedo(@participant.bac), :alt => get_speedo_alt(@participant.bac), :size => "300x300"
+
+  %h3 Your Money
+
+  %p
+    Depending on where you buy your drinks (i.e. a bottle store, pub or club),
+    you have spent between
+    %span.report= number_to_currency @participant.money[0]
+    and
+    %span.report= number_to_currency @participant.money[1]
+    on alcohol in the last year.
+
+  - if @participant.display_dpo? || @participant.display_dpw?
+    %h3 Your Drinking Amount Compared
+
+    - if @participant.display_dpo?
+      %h4 Standard Drinks Consumed Per Occasion
+
+      %div{:style => "text-align: center;"}
+        = image_tag dpo_graph_url, :alt => "Average Number of Standard Drinks"
+
       %p
-        Your estimated Blood Alcohol Content (BAC) for your heaviest drinking
-        occasion is
-        %span.report #{@participant.bac}%
+        You reported having approximately #{@participant.typical_drinks} drinks on a
+        typical occasion. The graph on the right shows how this compares to medical
+        guidelines<sup>1</sup> and to other people your age and sex<sup>2</sup>.
+
+      %ol.footnote
+        %li
+          National Health and Medical Research Council (NHMRC). Australian guidelines
+          to reduce health risks from drinking alcohol. Canberra: NHMRC; 2009.
+        %li
+          Australian Institute of Health and Welfare (AIHW). 2007 National Drug
+          Strategy Household Survey: detailed results. Drug Statistics Series number
+          22. Cat. no. PHE 107. Canberra: AIHW; 2008.
+
+    - if @participant.display_dpw?
+      %h4 Standard Drinks Consumed Per Week
+
+      %div{:style => "text-align: center;"}
+        = image_tag dpw_graph_url, :alt => "Average Number of Standard Drinks"
 
       %p
-        Some of the questions you answered regarding your drinking come from the
-        Alcohol Use Disorders Identification Test, a questionnaire developed by the
-        World Health Organisation to determine whether a person's drinking might be
-        becoming problematic.
+        You reported consuming approximatately #{@participant.dpw} drinks per week,
+        and #{@participant.dpw * 4} drinks per month. The graph on the left shows how
+        this compares to medical guidelines<sup>1</sup> and to other people your age
+        and sex<sup>2</sup>.
 
-      %p
-        This estimate takes into account you gender, weight, the number of standard
-        drinks consumed and the number of hours over which you reported drinking this
-        amount.
-    %td
-      = image_tag get_speedo(@participant.bac), :alt => get_speedo_alt(@participant.bac), :size => "300x300"
+      %ol.footnote
+        %li
+          Australian Institute of Health and Welfare (AIHW). 2007 National Drug
+          Strategy Household Survey: detailed results. Drug Statistics Series number
+          22. Cat. no. PHE 107. Canberra: AIHW; 2008.
+        %li
+          National Health and Medical Research Council (NHMRC). Australian guidelines
+          to reduce health risks from drinking alcohol. Canberra: NHMRC; 2009.
 
-%h3 Your Money
+  %h3 Your Risk Of Alcohol Dependence
 
-%p
-  Depending on where you buy your drinks (i.e. a bottle store, pub or club),
-  you have spent between
-  %span.report= number_to_currency @participant.money[0]
-  and
-  %span.report= number_to_currency @participant.money[1]
-  on alcohol in the last year.
+  %p
+    How in control of your drinking are you? The 10 questions you answered at the
+    end of the questionnaire were from the Leeds Dependence Questionnaire, a
+    validated clinical measure of the severity of alcohol dependence.
 
-- if @participant.display_dpo? || @participant.display_dpw?
-  %h3 Your Drinking Amount Compared
+  %p
+    Generally speaking, the higher the score the more reason for concern that
+    your drinking may be out of control. Your score was
+    %strong= @participant.ldq
+    and suggests that...
 
-  - if @participant.display_dpo?
-    %h4 Standard Drinks Consumed Per Occaision
+  %p
+    != ldq_suggestion(@participant.ldq)
 
-    %div{:style => "text-align: center;"}
-      = image_tag dpo_graph_url, :alt => "Average Number of Standard Drinks"
-
-    %p
-      You reported having approximately #{@participant.typical_drinks} drinks on a
-      typical occasion. The graph on the right shows how this compares to medical
-      guidelines<sup>1</sup> and to other people your age and sex<sup>2</sup>.
-
-    %ol.footnote
-      %li
-        National Health and Medical Research Council (NHMRC). Australian guidelines
-        to reduce health risks from drinking alcohol. Canberra: NHMRC; 2009.
-      %li
-        Australian Institute of Health and Welfare (AIHW). 2007 National Drug
-        Strategy Household Survey: detailed results. Drug Statistics Series number
-        22. Cat. no. PHE 107. Canberra: AIHW; 2008.
-
-  - if @participant.display_dpw?
-    %h4 Standard Drinks Consumed Per Week
-
-    %div{:style => "text-align: center;"}
-      = image_tag dpw_graph_url, :alt => "Average Number of Standard Drinks"
-
-    %p
-      You reported consuming approximatately #{@participant.dpw} drinks per week,
-      and #{@participant.dpw * 4} drinks per month. The graph on the left shows how
-      this compares to medical guidelines<sup>1</sup> and to other people your age
-      and sex<sup>2</sup>.
-
-    %ol.footnote
-      %li
-        Australian Institute of Health and Welfare (AIHW). 2007 National Drug
-        Strategy Household Survey: detailed results. Drug Statistics Series number
-        22. Cat. no. PHE 107. Canberra: AIHW; 2008.
-      %li
-        National Health and Medical Research Council (NHMRC). Australian guidelines
-        to reduce health risks from drinking alcohol. Canberra: NHMRC; 2009.
-
-%h3 Your Risk Of Alcohol Dependence
-
-%p
-  How in control of your drinking are you? The 10 questions you answered at the
-  end of the questionnaire were from the Leeds Dependence Questionnaire, a
-  validated clinical measure of the severity of alcohol dependence.
-
-%p
-  Generally speaking, the higher the score the more reason for concern that
-  your drinking may be out of control. Your score was
-  %strong= @participant.ldq
-  and suggests that...
-
-%p
-  != ldq_suggestion(@participant.ldq)
-
-%p
-  Please see the
-  = link_to 'SUPPORT', support_path(@participant.key)
-  page for options.
+  %p
+    Please see the
+    = link_to 'SUPPORT', support_path(@participant.key)
+    page for options.
 
 = form_tag save_url(:page => 9, :key => @participant.key) do
   = render :partial => "continue"
