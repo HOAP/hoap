@@ -3,7 +3,7 @@ module SurveyHelper
 
   def audit_class(score, level)
     if @@audit_ranges[level].include?(score)
-      "audit_level"
+      "audit_level a#{level}"
     else
       "audit_other"
     end
