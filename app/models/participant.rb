@@ -208,4 +208,9 @@ class Participant < ActiveRecord::Base
     g.theme_37signals
     return g.to_blob
   end
+
+  def audit_only?
+    a = Answer.where(:participant_id => self.id, :page => 5).pluck(:value)
+    return a[0] == "No"
+  end
 end
