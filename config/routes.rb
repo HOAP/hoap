@@ -11,21 +11,23 @@ Hoap::Application.routes.draw do
 
   match "survey/feedback/:page/:key" => 'survey#feedback', :as => :feedback
 
-  match "facts/:key" => 'survey#facts', :as => :facts
-
-  match "tips/:key" => 'survey#tips', :as => :tips
-
-  match "support/:key" => 'survey#support', :as => :support
-
-  match "survey/dpo_graph/:key" => 'survey#dpo_graph', :as => :dpo_graph
-
-  match "survey/dpw_graph/:key" => 'survey#dpw_graph', :as => :dpw_graph
-
   resource :user_session
 
   get "users/index"
 
   resources :users
+
+  match "report/:key" => 'report#index', :as => :report
+
+  match "facts/:key" => 'report#facts', :as => :facts
+
+  match "tips/:key" => 'report#tips', :as => :tips
+
+  match "support/:key" => 'report#support', :as => :support
+
+  match "report/dpo_graph/:key" => 'report#dpo_graph', :as => :dpo_graph
+
+  match "report/dpw_graph/:key" => 'report#dpw_graph', :as => :dpw_graph
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

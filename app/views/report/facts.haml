@@ -1,4 +1,4 @@
-%h1 Facts
+= render "tabbar", :active => :facts
 
 %p
   It can be difficult to keep track of how much alcohol you are drinking
@@ -129,6 +129,3 @@
 %p
   Drinking alcohol can be part of an enjoyable night out, but drinking safely
   will ensure your have good memories and that you keep your license.
-
-= form_tag save_url(:page => 10, :key => @participant.key) do
-  = render :partial => "continue"

@@ -1,10 +1,4 @@
-:css
-  div.contact {
-    margin-top: 3em;
-    margin-bottom: 2em;
-  }
-
-%h1 Support
+= render "tabbar", :active => :support
 
 %p
   Some people can stop or reduce their drinking by themselves, whilst others
@@ -158,6 +152,3 @@
     Email:
     %a{:href => "mailto:CounsellingOnline@turningpoint.org"}
       CounsellingOnline@turningpoint.org
-
-= form_tag save_url(:page => 12, :key => @participant.key) do
-  = render :partial => "continue"

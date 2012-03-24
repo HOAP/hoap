@@ -1,0 +1,12 @@
+%ul.tab
+  %li{:class => active == :feedback ? "active" : ""}
+    = link_to raw('<span>Feedback</span>'), report_path(@participant.key)
+
+  %li{:class => active == :facts ? "active" : ""}
+    = link_to raw('<span>Facts</span>'), facts_path(@participant.key)
+
+  %li{:class => active == :support ? "active" : ""}
+    = link_to raw('<span>Support</span>'), support_path(@participant.key)
+
+  %li{:class => active == :tips ? "active" : ""}
+    = link_to raw('<span>Tips</span>'), tips_path(@participant.key)

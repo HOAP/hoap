@@ -34,7 +34,11 @@ class SurveyController < ApplicationController
     end
     if error_count == 0
       @participant.next_page!
-      redirect_to page_url(:key => @participant.key)
+      if @participant.completed
+        redirect_to report_url(@participant.key)
+      else
+        redirect_to page_url(:key => @participant.key)
+      end
     else
       @questions = Question.find_for(@participant)
       render :action => "page#{@participant.page}"
@@ -42,23 +46,6 @@ class SurveyController < ApplicationController
   end
 
   def feedback
-  end
-
-  def facts
-  end
-
-  def tips
-  end
-
-  def support
-  end
-
-  def dpo_graph
-    send_data(@participant.dpo_graph, :type => 'image/png', :disposition => 'inline', :filename => 'std_drinks_graph.png')
-  end
-
-  def dpw_graph
-    send_data(@participant.dpw_graph, :type => 'image/png', :disposition => 'inline', :filename => 'dpw_graph.png')
   end
 
   private
