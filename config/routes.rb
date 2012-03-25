@@ -1,4 +1,11 @@
 Hoap::Application.routes.draw do
+  get "admin/index"
+
+  get "admin/participant"
+  post "admin/participant"
+
+  get "admin/export"
+
   get "survey/index"
 
   post "survey/start"
