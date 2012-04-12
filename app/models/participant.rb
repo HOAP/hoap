@@ -183,11 +183,11 @@ class Participant < ActiveRecord::Base
     a += Answer.where(:participant_id => self.id, :page => 4).order("id ASC").limit(2).pluck(:value)
     g = Gruff::Bar.new(400)
     g.title = "Average Number of Standard Drinks"
-    g.data("Medical Guidlines", 4)
+    g.data("Australian Medical Guidelines", 4)
     if (a[3].to_i >= @@avg_dpo[a[0]][a[1]])
-      g.data("#{a[1]} year old #{a[0].downcase}s", @@avg_dpo[a[0]][a[1]])
+      g.data(self.peergroup, @@avg_dpo[a[0]][a[1]])
     end
-    g.data("Your Drinking", a[3].to_i)
+    g.data("YOU", a[3].to_i)
     g.sort = false
     g.minimum_value = 0
     g.theme_37signals
@@ -198,11 +198,11 @@ class Participant < ActiveRecord::Base
     a = Answer.where(:participant_id => self.id, :page => 2).order("id ASC").limit(2).pluck(:value)
     g = Gruff::Bar.new(400)
     g.title = "Standard Drinks Per Week"
-    g.data("Medical Guidlines", 14)
+    g.data("Australian Medical Guidelines", 14)
     if (self.dpw >= @@avg_dpw[a[0]][a[1]])
-      g.data("#{a[1]} year old #{a[0].downcase}s", @@avg_dpw[a[0]][a[1]])
+      g.data(self.peergroup, @@avg_dpw[a[0]][a[1]])
     end
-    g.data("Your Drinking", self.dpw)
+    g.data("YOU", self.dpw)
     g.sort = false
     g.minimum_value = 0
     g.theme_37signals
@@ -212,5 +212,20 @@ class Participant < ActiveRecord::Base
   def audit_only?
     a = Answer.where(:participant_id => self.id, :page => 5).pluck(:value)
     return a[0] == "No"
+  end
+
+  def peergroup
+    if self[:peergroup].blank?
+      a = Answer.where(:participant_id => self.id, :page => 2).order("id ASC").limit(2).pluck(:value)
+      self[:peergroup] = "#{a[1]} year old "
+      if a[0] =~ /female/i
+        self[:peergroup] += "women"
+      else
+        self[:peergroup] += "men"
+      end
+      self[:peergroup] += " in Australia"
+      self.save
+    end
+    return self[:peergroup]
   end
 end
