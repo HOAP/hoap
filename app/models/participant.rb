@@ -25,6 +25,11 @@ class Participant < ActiveRecord::Base
     "Female" => {"18-19" => 2.25, "20-24" => 2.25, "25-29" => 1.75, "30-34" => 1.75, "35-39" => 1.75, "40-44" => 2.25, "45-49" => 2.25, "50-54" => 0.875, "55-59" => 0.75, "60-64" => 0.875, "65-69" => 0.375, "70-74" => 0.375, "75-79" => 0.375, "80-84" => 0, "85+" => 0}
   }
 
+  @@themes = {
+    :two => {:colors=>["#339933", "red"], :marker_color=>"black", :font_color=>"black", :background_colors=>["#d1edf5", "white"]},
+    :three => {:colors=>["#339933", "#336699", "red"], :marker_color=>"black", :font_color=>"black", :background_colors=>["#d1edf5", "white"]}
+  }
+
   def audit_score(question, answer)
     @@audit_values[question][answer]
   end
@@ -182,6 +187,12 @@ class Participant < ActiveRecord::Base
     a = Answer.where(:participant_id => self.id, :page => 2).order("id ASC").limit(2).pluck(:value)
     a += Answer.where(:participant_id => self.id, :page => 4).order("id ASC").limit(2).pluck(:value)
     g = Gruff::Bar.new(400)
+    if (a[3].to_i >= @@avg_dpo[a[0]][a[1]])
+      g.theme = @@themes[:three]
+    else
+      g.theme = @@themes[:two]
+    end
+    g.bar_spacing = 0.6
     g.title = "Average Number of Standard Drinks"
     g.data("Australian Medical Guidelines", 4)
     if (a[3].to_i >= @@avg_dpo[a[0]][a[1]])
@@ -190,13 +201,18 @@ class Participant < ActiveRecord::Base
     g.data("YOU", a[3].to_i)
     g.sort = false
     g.minimum_value = 0
-    g.theme_37signals
     return g.to_blob
   end
 
   def dpw_graph
     a = Answer.where(:participant_id => self.id, :page => 2).order("id ASC").limit(2).pluck(:value)
     g = Gruff::Bar.new(400)
+    if (self.dpw >= @@avg_dpw[a[0]][a[1]])
+      g.theme = @@themes[:three]
+    else
+      g.theme = @@themes[:two]
+    end
+    g.bar_spacing = 0.6
     g.title = "Standard Drinks Per Week"
     g.data("Australian Medical Guidelines", 14)
     if (self.dpw >= @@avg_dpw[a[0]][a[1]])
@@ -205,7 +221,6 @@ class Participant < ActiveRecord::Base
     g.data("YOU", self.dpw)
     g.sort = false
     g.minimum_value = 0
-    g.theme_37signals
     return g.to_blob
   end
 
