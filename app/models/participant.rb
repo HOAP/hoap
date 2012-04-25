@@ -184,10 +184,8 @@ class Participant < ActiveRecord::Base
   end
 
   def dpo_graph
-    a = Answer.where(:participant_id => self.id, :page => 2).order("id ASC").limit(2).pluck(:value)
-    a += Answer.where(:participant_id => self.id, :page => 4).order("id ASC").limit(2).pluck(:value)
     g = Gruff::Bar.new(400)
-    if (a[3].to_i >= @@avg_dpo[a[0]][a[1]])
+    if (self.show_peer_dpo?)
       g.theme = @@themes[:three]
     else
       g.theme = @@themes[:two]
@@ -195,19 +193,20 @@ class Participant < ActiveRecord::Base
     g.bar_spacing = 0.6
     g.title = "Average Number of Standard Drinks"
     g.data("Australian Medical Guidelines", 4)
-    if (a[3].to_i >= @@avg_dpo[a[0]][a[1]])
+    if (self.show_peer_dpo?)
+      a = Answer.where(:participant_id => self.id, :page => 2).order("id ASC").limit(2).pluck(:value)
       g.data(self.peergroup, @@avg_dpo[a[0]][a[1]])
     end
-    g.data("YOU", a[3].to_i)
+    a = Answer.where(:participant_id => self.id, :page => 4).order("id ASC").limit(2).pluck(:value)
+    g.data("YOU", a[1].to_i)
     g.sort = false
     g.minimum_value = 0
     return g.to_blob
   end
 
   def dpw_graph
-    a = Answer.where(:participant_id => self.id, :page => 2).order("id ASC").limit(2).pluck(:value)
     g = Gruff::Bar.new(400)
-    if (self.dpw >= @@avg_dpw[a[0]][a[1]])
+    if (self.show_peer_dpw?)
       g.theme = @@themes[:three]
     else
       g.theme = @@themes[:two]
@@ -215,7 +214,8 @@ class Participant < ActiveRecord::Base
     g.bar_spacing = 0.6
     g.title = "Standard Drinks Per Week"
     g.data("Australian Medical Guidelines", 14)
-    if (self.dpw >= @@avg_dpw[a[0]][a[1]])
+    if (self.show_peer_dpw?)
+      a = Answer.where(:participant_id => self.id, :page => 2).order("id ASC").limit(2).pluck(:value)
       g.data(self.peergroup, @@avg_dpw[a[0]][a[1]])
     end
     g.data("YOU", self.dpw)
@@ -242,5 +242,22 @@ class Participant < ActiveRecord::Base
       self.save
     end
     return self[:peergroup]
+  end
+
+  def show_peer_dpo?
+    if self.peer_dpo.nil?
+      a = Answer.where(:participant_id => self.id, :page => 2).order("id ASC").limit(2).pluck(:value)
+      a += Answer.where(:participant_id => self.id, :page => 4).order("id ASC").limit(2).pluck(:value)
+      self.peer_dpo = a[3].to_i >= @@avg_dpo[a[0]][a[1]]
+    end
+    return self.peer_dpo
+  end
+
+  def show_peer_dpw?
+    if self.peer_dpw.nil?
+      a = Answer.where(:participant_id => self.id, :page => 2).order("id ASC").limit(2).pluck(:value)
+      self.peer_dpw = self.dpw >= @@avg_dpw[a[0]][a[1]]
+    end
+    return self.peer_dpw
   end
 end

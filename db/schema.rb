@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120412075241) do
+ActiveRecord::Schema.define(:version => 20120425080742) do
 
   create_table "answers", :force => true do |t|
     t.integer  "participant_id"
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(:version => 20120412075241) do
     t.integer  "c_ldq"
     t.decimal  "c_dpw",                    :precision => 5, :scale => 2
     t.string   "peergroup"
+    t.boolean  "peer_dpo"
+    t.boolean  "peer_dpw"
   end
 
   add_index "participants", ["key"], :name => "index_participants_on_key", :unique => true
