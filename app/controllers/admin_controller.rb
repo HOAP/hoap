@@ -7,6 +7,11 @@ class AdminController < ApplicationController
   end
 
   def participant
+    count = params[:count].to_i
+    count.times do
+      Participant.make
+    end
+    redirect_to :action => :index
   end
 
   def export

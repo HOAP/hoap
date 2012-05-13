@@ -12,8 +12,14 @@
   - @available.each do |key|
     %li= link_to key, start_link_url(key)
 
+= form_tag :action => :participant do
+  %p
+    Make
+    = select_tag :count, options_for_select((1..10).to_a)
+    new participant codes
+    = submit_tag "Go!"
+
 %p Things to do:
 
 %ol
-  %li Add new participants
   %li Export the current data set
