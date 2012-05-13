@@ -1,5 +1,17 @@
 %h1 Welcome to the HOAP Admin Interface
 
+%p
+  <b>Status</b>:
+  = pluralize @count, "participant has", "participants have"
+  done the survey.
+
+%p
+  <b>Available Participant Codes</b>
+
+%ul
+  - @available.each do |key|
+    %li= link_to key, start_link_url(key)
+
 %p Things to do:
 
 %ol
