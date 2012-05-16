@@ -57,10 +57,28 @@ pages = [
   ]
 ]
 
+reseed = Question.count > 0
+if reseed
+  questions = Question.order(:id).all
+end
 pages.each do |page|
   page.each do |question|
-    Question.create(question)
+    if reseed
+      q = questions.shift
+      q.update_attributes(question)
+      q.save
+    else
+      Question.create(question)
+    end
   end
 end
 
-User.create(:login => "tony", :email => "tony@agrav.net", :password => "default", :password_confirmation => "default", :admin => true)
+if reseed && !questions.empty?
+  questions.each do |q|
+    q.delete
+  end
+end
+
+unless reseed
+  User.create(:login => "tony", :email => "tony@agrav.net", :password => "default", :password_confirmation => "default", :admin => true)
+end
