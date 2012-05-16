@@ -53,6 +53,10 @@
 
       %p{:class => audit_class(@participant.audit, 0)}
         MODERATE DRINKING (0-7) Low risk of alcohol related harm.
+        %br
+        Of course, the above does not apply to women who are pregnant, planning
+        a pregnancy or who are breastfeeding. In these cases, not drinking is
+        the safest option<sup>1</sup>.
 
       %p{:class => audit_class(@participant.audit, 1)}
         HAZARDOUS DRINKING (8-14) High risk of experiencing alcohol related harm and
@@ -74,6 +78,11 @@
         number of drinks you consume per occasion. You may like to check out the
         = link_to 'TIPS', tips_path(@participant.key)
         section for ideas on reducing your consumption.
+
+      %ol.footnote
+        %li
+          National Health and Medical Research Council (NHMRC). Australian guidelines
+          to reduce health risks from drinking alcohol. Canberra: NHMRC; 2009.
 
 - unless @participant.audit_only?
   %h3 Your Blood Alcohol Content
