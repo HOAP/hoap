@@ -1,3 +1,36 @@
 // Place all the styles related to the Admin controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#wrapper {
+  background-color: #fff;
+  display: block;
+  border: 1px solid gray;
+  background-color: #fff;
+  padding: 5px;
+  margin: 0px 10px 0px 10px;
+}
+
+#headline {
+  text-align: right;
+  background-color: rgb(44, 64, 86);
+  color: white;
+  padding: 5px;
+  margin: 0px 10px 0px 10px;
+}
+
+#headline > a {
+  color: white;
+  text-decoration: none;
+  font-size: 80%;
+  margin-left: 1em;
+}
+
+#headline > a:hover {
+  background-color: rgb(44, 64, 86);
+  text-decoration: underline;
+}
+
+#back {
+  text-align: center;
+}

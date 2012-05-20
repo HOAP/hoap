@@ -1,5 +1,5 @@
 Hoap::Application.routes.draw do
-  get "admin/index"
+  get "admin/index", :as => :admin
 
   get "admin/participant"
   post "admin/participant"

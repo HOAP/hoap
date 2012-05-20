@@ -11,9 +11,9 @@ class UserSessionsController < ApplicationController
     if @user_session.save
       flash[:notice] = "Login successful!"
       if @user_session.user.admin
-        redirect_back_or_default root_url
+        redirect_back_or_default admin_url
       else
-        redirect_back_or_default root_url
+        redirect_back_or_default admin_url
       end
     else
       render :action => :new
