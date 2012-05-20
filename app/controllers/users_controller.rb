@@ -1,10 +1,9 @@
 class UsersController < ApplicationController
-  before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => [:show, :edit, :update]
-  before_filter :require_admin_user, :only => [:index]
+  before_filter :require_admin_user, :only => [:index, :new, :create]
 
   def index
-    @users = User.select("id, login, email, admin, last_login_at")
+    @users = User.select("id, login, email, admin, last_login_at").order("id ASC")
   end
 
   def new
@@ -15,7 +14,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       flash[:notice] = "Account registered!"
-      redirect_back_or_default new_user_session_url
+      redirect_back_or_default users_url
     else
       render :action => :new
     end

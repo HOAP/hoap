@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-  before_filter :require_admin_user
+  before_filter :require_user
 
   def index
     @count = Participant.where(:completed => true).count

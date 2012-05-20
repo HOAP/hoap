@@ -12,3 +12,6 @@
       %td= user.email
       %td{:style => "text-align: center;"}!= user.admin ? "&#x2713;" : ""
       %td= user.last_login_at
+
+%p{:style => "text-align: center"}
+  = link_to 'New User', new_user_url
