@@ -30,7 +30,7 @@ class ReportController < ApplicationController
     end
     if @participant.nil?
       flash[:error] = "Unknown participant code."
-      redirect_to :action => 'index'
+      redirect_to root_url
     end
   end
 end
