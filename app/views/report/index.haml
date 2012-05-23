@@ -6,7 +6,7 @@
   Here you will find some feedback based on the answers you provided as well as
   some information on reducing the risk of harm which you may find useful.
 
-- unless @participant.display_dpo? || @participant.display_dpw?
+- unless (@participant.display_dpo? || @participant.display_dpw?) && @participant.audit <= 7
   = render :partial => 'audit_report'
 
 - unless @participant.audit_only?
