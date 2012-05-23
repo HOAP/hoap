@@ -6,7 +6,8 @@
   Here you will find some feedback based on the answers you provided as well as
   some information on reducing the risk of harm which you may find useful.
 
-= render :partial => 'audit_report'
+- unless @participant.display_dpo? || @participant.display_dpw?
+  = render :partial => 'audit_report'
 
 - unless @participant.audit_only?
   %h3 Your Blood Alcohol Content
