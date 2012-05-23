@@ -173,13 +173,11 @@ class Participant < ActiveRecord::Base
   end
 
   def display_dpo?
-    a = Answer.where(:participant_id => self.id, :page => 2).order("id ASC").limit(2).pluck(:value)
-    a += Answer.where(:participant_id => self.id, :page => 4).order("id ASC").limit(2).pluck(:value)
-    return a[3].to_i > 4
+    a = Answer.where(:participant_id => self.id, :page => 4).order("id ASC").limit(2).pluck(:value)
+    return a[1].to_i > 4
   end
 
   def display_dpw?
-    a = Answer.where(:participant_id => self.id, :page => 2).order("id ASC").limit(2).pluck(:value)
     return self.dpw > 14
   end
 
