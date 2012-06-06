@@ -5,15 +5,19 @@ class SurveyController < ApplicationController
   end
 
   def start
-    if params[:code].present? && params[:code] =~ /^[0-9a-f]{12}$/i
-      @participant = Participant.where(:key => params[:code].downcase).first
+    if params[:code].present?
+      if Participant.exists?(:code => params[:code])
+        @participant = Participant.where(:code => params[:code]).first
+      else
+        @participant = Participant.make(params[:code])
+      end
       unless @participant.nil? || @participant.completed
         redirect_to page_url(@participant.key)
         return
       end
       flash[:error] = "Non existent code."
     else
-      flash[:error] = "Invalid invitation code."
+      flash[:error] = "Please enter a participant code."
     end
     redirect_to :action => 'index'
   end

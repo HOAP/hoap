@@ -34,10 +34,10 @@ class Participant < ActiveRecord::Base
     @@audit_values[question][answer]
   end
 
-  def self.make
+  def self.make(code)
     begin
       key = Digest::SHA1.hexdigest("#{rand} - #{Time.now.to_f}")[0..11]
-      participant = self.create(:key => key)
+      participant = self.create(:key => key, :code => code)
     rescue
       retry
     end
