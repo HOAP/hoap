@@ -30,6 +30,9 @@ class Participant < ActiveRecord::Base
     :three => {:colors=>["#339933", "#336699", "red"], :marker_color=>"black", :font_color=>"black", :background_colors=>["#d1edf5", "white"]}
   }
 
+  @@public_key = nil
+  @@private_key = nil
+
   def audit_score(question, answer)
     @@audit_values[question][answer]
   end
@@ -259,8 +262,29 @@ class Participant < ActiveRecord::Base
     return self.peer_dpw
   end
 
+  def email=(email)
+    if @@public_key.nil?
+      @@public_key = OpenSSL::PKey::RSA.new(File.read("config/public.pem"))
+    end
+    self[:email] = @@public_key.public_encrypt(email)
+  end
+
+  def email
+    if self[:email].nil?
+      return nil
+    end
+    if @@private_key.nil?
+      if File.exists?("config/private.pem")
+        @@private_key = OpenSSL::PKey::RSA.new(File.read("config/private.pem"))
+      else
+        return "ENCRYPTED"
+      end
+    end
+    return @@private_key.private_decrypt(self[:email])
+  end
+
   def to_a
-    results = [self.id, self.code, self.name, self.completed]
+    results = [self.id, self.code, self.name, self.email, self.completed]
     results += [self.c_audit, self.c_bac, self.c_ldq]
     results += Answer.values(self.id)
     return results
