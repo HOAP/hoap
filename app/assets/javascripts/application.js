@@ -53,3 +53,18 @@ function configureCheck() {
     });
   });
 }
+
+function configurePage2() {
+  jQuery.validator.messages.equalTo = "Please enter the same address again.";
+  $("input:radio").on("click", function() {
+    if ($("#have_email_y").attr("checked") == "checked") {
+      $("#email").show();
+      $("#participant_email").addClass("email");
+      $("#email_confirmation").rules("add", { equalTo: "#participant_email" });
+    } else {
+      $("#email").hide();
+      $("#participant_email").removeClass("email");
+    }
+  });
+  $("#email").hide();
+}

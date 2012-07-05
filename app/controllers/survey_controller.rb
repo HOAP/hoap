@@ -30,10 +30,11 @@ class SurveyController < ApplicationController
 
   def save
     @participant.update_progress(params[:page])
-    if @participant.page == 1
+    if @participant.page == 1 || @participant.page == 2
       @participant.update_attributes(params[:participant])
       error_count = @participant.errors.count
-    else
+    end
+    if !params[:answer].blank?
       @answers, error_count = Answer.save_all(params[:answer])
     end
     if error_count == 0
