@@ -63,7 +63,7 @@ if reseed
 end
 pages.each do |page|
   page.each do |question|
-    if reseed
+    if reseed && !questions.empty?
       q = questions.shift
       q.update_attributes(question)
       q.save
