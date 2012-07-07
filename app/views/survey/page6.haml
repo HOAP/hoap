@@ -1,0 +1,12 @@
+= image_tag "drinks.png", :style => "float: left; position: absolute; left: 3em;"
+
+%h1 Your Drinking Continued&hellip;
+
+= form_tag save_url(:page => 6, :key => @participant.key) do
+  - @questions.length.times do |i|
+    - @question, @answer = @questions[i], @answers[i]
+    %p
+      #{i + 4}. #{@question.text}
+      %br
+      = render :partial => "answer"
+  = render :partial => "continue"
