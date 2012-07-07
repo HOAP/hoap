@@ -8,7 +8,7 @@
 %p
   Please select the option that relates best to your answer.
 
-= form_tag save_url(:page => 4, :key => @participant.key) do
+= form_tag save_url(:page => 5, :key => @participant.key) do
   - @questions.length.times do |i|
     - @question, @answer = @questions[i], @answers[i]
     %p
