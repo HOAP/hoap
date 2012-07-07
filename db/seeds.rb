@@ -32,10 +32,10 @@ pages = [
     {:page => 5, :text => "Have you had a drink containing alcohol in the <strong>LAST 4 WEEKS</strong>?", :atype => "R", :values => %w{Yes No}}
   ],
   [
-    {:page => 6, :text => "In the LAST 4 WEEKS what is the largest number of Standard Drinks you have consumed on a single occasion?", :atype => "S", :values => [["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10", "10"], ["11", "11"], ["12", "12"], ["13", "13"], ["14", "14"], ["15", "15"], ["16", "16"], ["17", "17"], ["18", "18"], ["19", "19"], ["20", "20"], ["21", "21"], ["22", "22"], ["23", "23"], ["24", "24"], ["25-29", "27"], ["30-34", "32"], ["35-39", "37"], ["40-44", "42"], ["45-49", "47"], ["50 or more", "50"]]},
-    {:page => 6, :text => "Over how many hours did you drink this amount (to the nearest hour)?", :atype => "S", :values => ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"]},
-    {:page => 6, :text => "Height", :atype => "T"},
-    {:page => 6, :text => "Weight", :atype => "T"}
+    {:page => 8, :text => "In the LAST 4 WEEKS what is the largest number of Standard Drinks you have consumed on a single occasion?", :atype => "S", :values => [["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10", "10"], ["11", "11"], ["12", "12"], ["13", "13"], ["14", "14"], ["15", "15"], ["16", "16"], ["17", "17"], ["18", "18"], ["19", "19"], ["20", "20"], ["21", "21"], ["22", "22"], ["23", "23"], ["24", "24"], ["25-29", "27"], ["30-34", "32"], ["35-39", "37"], ["40-44", "42"], ["45-49", "47"], ["50 or more", "50"]]},
+    {:page => 8, :text => "Over how many hours did you drink this amount (to the nearest hour)?", :atype => "S", :values => ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24"]},
+    {:page => 8, :text => "Height", :atype => "T"},
+    {:page => 8, :text => "Weight", :atype => "T"}
   ],
   [
     {:page => 9, :text => "Do you find your self thinking about when you will next be able to have another drink?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
