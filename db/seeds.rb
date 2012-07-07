@@ -17,6 +17,9 @@ pages = [
     {:page => 3, :text => "Have you had a drink containing alcohol in the <strong>LAST 12 MONTHS</strong>?", :atype => "R", :values => %w{Yes No}}
   ],
   [
+    {:page => 4, :text => "Are you currently receiving treatment for your drinking?", :atype => "R", :values => %w{Yes No}}
+  ],
+  [
     {:page => 5, :text => "How often do you have a drink containing alcohol?", :atype => "S", :values => ["Never or almost never", "Less than once a month", "Once a month", "Once every two weeks", "Once a week", "Two or three times a week", "Four or five times a week", "Six or seven times a week"]},
     {:page => 5, :text => "How many Standard Drinks containing alcohol do you have on a typical day when you are drinking? (Please refer to the Standard Drinks guide on the left)", :atype => "S", :values => ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25-29", "30-34", "35-39", "40-49", "50 or more"]},
     {:page => 5, :text => "How often do you have 6 or more Standard Drinks on one occasion?", :atype => "S", :values => ["Never", "Once or twice a year", "Less than monthly", "Monthly", "Weekly", "Daily or almost daily"]},
