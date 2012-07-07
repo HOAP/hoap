@@ -38,16 +38,16 @@ pages = [
     {:page => 6, :text => "Weight", :atype => "T"}
   ],
   [
-    {:page => 7, :text => "Do you find your self thinking about when you will next be able to have another drink?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
-    {:page => 7, :text => "Is drinking more important than anything else you might do during the day?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
-    {:page => 7, :text => "Do you feel your need for drink is too strong to control?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
-    {:page => 7, :text => "Do you plan your days around getting drink and drinking?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
-    {:page => 7, :text => "Do you drink in a particular way in order to increase the effect it gives you?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
-    {:page => 7, :text => "Do you drink morning, afternoon and evening?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
-    {:page => 7, :text => "Do you feel you have to carry on drinking once you have started?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
-    {:page => 7, :text => "Is getting the effect you want more important than the particular drink you use?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
-    {:page => 7, :text => "Do you want to drink more when the effect starts to wear off?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
-    {:page => 7, :text => "Do you find it difficult to cope with life without drink?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]}
+    {:page => 9, :text => "Do you find your self thinking about when you will next be able to have another drink?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
+    {:page => 9, :text => "Is drinking more important than anything else you might do during the day?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
+    {:page => 9, :text => "Do you feel your need for drink is too strong to control?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
+    {:page => 9, :text => "Do you plan your days around getting drink and drinking?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
+    {:page => 9, :text => "Do you drink in a particular way in order to increase the effect it gives you?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
+    {:page => 9, :text => "Do you drink morning, afternoon and evening?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
+    {:page => 9, :text => "Do you feel you have to carry on drinking once you have started?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
+    {:page => 9, :text => "Is getting the effect you want more important than the particular drink you use?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
+    {:page => 9, :text => "Do you want to drink more when the effect starts to wear off?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
+    {:page => 9, :text => "Do you find it difficult to cope with life without drink?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]}
   ]
 ]
 
