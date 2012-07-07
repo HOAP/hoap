@@ -48,13 +48,6 @@ pages = [
     {:page => 7, :text => "Is getting the effect you want more important than the particular drink you use?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
     {:page => 7, :text => "Do you want to drink more when the effect starts to wear off?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
     {:page => 7, :text => "Do you find it difficult to cope with life without drink?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]}
-  ],
-  [
-    {:page => 8, :text => "Have you had any fractures or dislocations to your bones or joints?", :atype => "S", :values => [["Yes", "1"], ["No", "0"], ["Prefer not to answer", "9"]]},
-    {:page => 8, :text => "Have you been injured in a road traffic accident?", :atype => "S", :values => [["Yes", "1"], ["No", "0"], ["Prefer not to answer", "9"]]},
-    {:page => 8, :text => "Have you injured your head?", :atype => "S", :values => [["Yes", "1"], ["No", "0"], ["Prefer not to answer", "9"]]},
-    {:page => 8, :text => "Have you been injured in an assault or fight (excluding injuries during sports)?", :atype => "S", :values => [["Yes", "1"], ["No", "0"], ["Prefer not to answer", "9"]]},
-    {:page => 8, :text => "Have you been injured after drinking?", :atype => "S", :values => [["Yes", "1"], ["No", "0"], ["Prefer not to answer", "9"]]}
   ]
 ]
 
