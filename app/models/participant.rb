@@ -1,4 +1,5 @@
 class Participant < ActiveRecord::Base
+  include Rails.application.routes.url_helpers
   has_many :answers
   serialize :c_money, Array
 
@@ -96,6 +97,15 @@ class Participant < ActiveRecord::Base
       end
     end
     self.save
+  end
+
+  # Return the current URL the participant should be directed to.
+  def current_path
+    if self.completed && self.exit_code == 0
+      return report_path(self.key)
+    else
+      return page_path(self.key)
+    end
   end
 
   # The AUDIT-C score (page 5) - a reduced AUDIT to check eligibility.

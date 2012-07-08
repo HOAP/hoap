@@ -11,8 +11,8 @@ class SurveyController < ApplicationController
       else
         @participant = Participant.make(params[:code])
       end
-      unless @participant.nil? || @participant.completed
-        redirect_to page_url(@participant.key)
+      unless @participant.nil?
+        redirect_to @participant.current_path
         return
       end
       flash[:error] = "Non existent code."
@@ -25,7 +25,7 @@ class SurveyController < ApplicationController
   def page
     if @participant.completed
       if @participant.exit_code == 0
-        redirect_to report_url(@participant)
+        redirect_to @participant.current_path
       else
         render "exit#{@participant.exit_code}"
       end
@@ -47,11 +47,7 @@ class SurveyController < ApplicationController
     end
     if error_count == 0
       @participant.next_page!
-      if @participant.completed
-        redirect_to report_url(@participant.key)
-      else
-        redirect_to page_url(:key => @participant.key)
-      end
+      redirect_to @participant.current_path
     else
       @questions = Question.find_for(@participant)
       render :action => "page#{@participant.page}"
