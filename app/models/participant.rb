@@ -64,25 +64,47 @@ class Participant < ActiveRecord::Base
   # Increment the current page, and save.
   # If the end is reached, automatically sets completed to true.
   def next_page!
-    if self.page > Question.count(:page, :distinct => true)
-      self.completed = true
-    end
-    if self.page != 99
-      self.page += 1
-    end
-    # Skip pages when answering no to Question on page 3 or 5
-    if self.page == 4
-      answer = Answer.where(:participant_id => self.id, :page => 3).order("id ASC").select(:value).first
-      if answer.value =~ /no/i
-        self.page = 99
+    # Exit as appropriate (i.e. Control, Ineleigible, Completed)
+    if self.page == 3 || self.page == 4 || self.page == 7
+      answer = Answer.where(:participant_id => self.id, :page => self.page).pluck(:value)
+      if self.page == 3 && answer[0] =~ /no/i
+        # Ineligible if they have not consumed alcohol in last year.
+        self.exit_code = 1
+        self.completed = true
+      elsif self.page == 4 && answer[0] =~ /yes/i
+        # Ineligible if they are currently receiving treatment for alcohol use.
+        self.exit_code = 2
+        self.completed = true
+      elsif self.page == 7 && answer[0] =~ /no/i
+        # Skip LDQ if not drunk any alcohol in last 4 weeks.
+        self.page += 1
       end
-    elsif self.page == 6
-      answer = Answer.where(:participant_id => self.id, :page => 5).order("id ASC").select(:value).first
-      if answer.value =~ /no/i
-        self.page = 8
+    elsif self.page == 5
+      # Check AUDIT-C
+      if self.audit_c < 5
+        # Ineligible if they have sensible drinking habits.
+        self.exit_code = 3
+        self.completed = true
+      else
+        # Stratify into control/subject
+      end
+    end
+    if !self.completed
+      self.page += 1
+      if self.page > Question.maximum(:page)
+        self.completed = true
       end
     end
     self.save
+  end
+
+  # The AUDIT-C score (page 5) - a reduced AUDIT to check eligibility.
+  def audit_c
+    answers = Answer.where(:participant_id => self.id, :page => 5).order("id ASC")
+    result = answers.reduce(0) do |sum, a|
+      sum + audit_score(a.question_id, a.value)
+    end
+    return result
   end
 
   # The AUDIT score (page 5 & 6)

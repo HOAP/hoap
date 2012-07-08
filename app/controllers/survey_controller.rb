@@ -23,9 +23,17 @@ class SurveyController < ApplicationController
   end
 
   def page
-    @questions = Question.find_for(@participant)
-    @answers = Answer.find_for(@participant)
-    render :action => "page#{@participant.page}"
+    if @participant.completed
+      if @participant.exit_code == 0
+        redirect_to report_url(@participant)
+      else
+        render "exit#{@participant.exit_code}"
+      end
+    else
+      @questions = Question.find_for(@participant)
+      @answers = Answer.find_for(@participant)
+      render :action => "page#{@participant.page}"
+    end
   end
 
   def save
