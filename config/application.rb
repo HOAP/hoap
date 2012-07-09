@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'pdfkit'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -58,5 +59,7 @@ module Hoap
 
     # Do not initialise the whole app to compile assets - this fails on Heroku
     config.assets.initialize_on_precompile = false
+
+    config.middleware.use PDFKit::Middleware, {:page_size => :A4}, :only => %r[^/report]
   end
 end

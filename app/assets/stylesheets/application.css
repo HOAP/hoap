@@ -3,7 +3,7 @@
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
- *= require_tree .
+ *= require_tree ./all
  *= require jquery-ui
 */
 
@@ -136,68 +136,4 @@ table.partlist td, th {
 
 .errorCell {
   border: 3px solid red;
-}
-
-/* Styles for feedback pages */
-table.audit {
-  width: 170px;
-  margin-top: 2em;
-  border-collapse: separate;
-}
-td.level {
-  color: #FFF;
-  text-align: center;
-  font-size: 120%;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  padding-left: 0.3em;
-  padding-right: 0.3em;
-}
-td.text {
-  font-size: 90%;
-  padding-left: 1em;
-}
-tr.audit_other td.level {
-  border: 1px solid #696371;
-  background-color: #EBDDFE;
-}
-tr.audit_other td.text {
-  color: #666;
-}
-tr.audit_level td.level {
-  border: 1px solid #3F1470;
-  background-color: #8300FC;
-}
-tr.audit_level td.text {
-  color: #222;
-}
-p.audit_level {
-  padding: 5px;
-  font-weight: bold;
-}
-span.report {
-  color: #F00;
-}
-.footnote {
-  font-size: 80%;
-}
-
-p.a0 {
-  background-color: #8CEC89;
-  border: 1px solid #10570e;
-}
-
-p.a1 {
-  background-color: #E9FC8D;
-  border: 1px solid #a7c905;
-}
-
-p.a2 {
-  background-color: #FFDE8E;
-  border: 1px solid #d29500;
-}
-
-p.a3 {
-  background-color: #FFAA8E;
-  border: 1px solid #c13000;
 }

@@ -61,6 +61,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.19)
     multi_json (1.3.6)
+    pdfkit (0.5.2)
     pg (0.14.0)
     polyglot (0.3.3)
     rack (1.4.1)
@@ -98,7 +99,7 @@ GEM
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    thin (1.3.1)
+    thin (1.4.1)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
@@ -122,6 +123,7 @@ DEPENDENCIES
   gruff
   haml
   jquery-rails
+  pdfkit
   pg
   rails (= 3.2.6)
   rmagick
