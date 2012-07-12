@@ -28,4 +28,8 @@ class Answer < ActiveRecord::Base
     answers.sort_by! { |ans| ans.id }
     return answers, error_count
   end
+
+  def self.values(participant_id)
+    return self.where(:participant_id => participant_id).order("id ASC").pluck(:value)
+  end
 end

@@ -258,4 +258,11 @@ class Participant < ActiveRecord::Base
     end
     return self.peer_dpw
   end
+
+  def to_a
+    results = [self.id, self.code, self.name, self.completed]
+    results += [self.c_audit, self.c_bac, self.c_ldq]
+    results += Answer.values(self.id)
+    return results
+  end
 end
