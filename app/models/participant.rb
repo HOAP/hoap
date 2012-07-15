@@ -3,6 +3,8 @@ class Participant < ActiveRecord::Base
   has_many :answers
   serialize :c_money, Array
 
+  @@control_pct = 50
+
   @@audit_values = {
     7 => {"Never or almost never" => 0, "Less than once a month" => 1, "Once a month" => 1, "Once every two weeks" => 2, "Once a week" => 2, "Two or three times a week" => 3, "Four or five times a week" => 4, "Six or seven times a week" => 4},
     8 => {"1" => 0, "2" => 0, "3" => 1, "4" => 1, "5" => 2, "6" => 2, "7" => 3, "8" => 3, "9" => 3, "10" => 4, "11" => 4, "12" => 4, "13" => 4, "14" => 4, "15" => 4, "16" => 4, "17" => 4, "18" => 4, "19" => 4, "20" => 4, "21" => 4, "22" => 4, "23" => 4, "24" => 4, "25-29" => 4, "30-34" => 4, "35-39" => 4, "40-49" => 4, "50 or more" => 4},
@@ -88,6 +90,10 @@ class Participant < ActiveRecord::Base
         self.completed = true
       else
         # Stratify into control/subject
+        if SecureRandom.random_number(100) < @@control_pct
+          self.exit_code = 4
+          self.completed = true
+        end
       end
     end
     if !self.completed
