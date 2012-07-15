@@ -1,10 +1,7 @@
 = render "tabbar", :active => :tips
 
 %p
-  Practical
-  %a{:href => "http://www.mhfa.com.au/documents/guidelines/8252_MHFA_prob_drinking_may09.pdf"}<
-    tips for low-risk drinking
-  include the following:
+  Practical tips for low-risk drinking include the following:
 
 %ul
   %li
@@ -43,7 +40,12 @@
   %li
     Identify situations where drinking is likely and avoid them if possible
 
+%p{:style => 'font-size: 80%'}
+  (Taken from
+  = link_to_if APP_CONFIG['link'], 'http://www.mhfa.com.au/documents/guidelines/8252_MHFA_prob_drinking_may09.pdf', 'http://www.mhfa.com.au/documents/guidelines/8252_MHFA_prob_drinking_may09.pdf'
+  )
+
 %p
   Other tips for controlling your drinking are available from the
-  %a{:href => "http://www.druginfo.adf.org.au/druginfo/fact_sheets/the_facts_about_binge_drinking/the_facts_about_binge_drinking.html"}<
-    Australian Drug Foundation
+  Australian Drug Foundation:
+  = link_to_if APP_CONFIG['link'],  "http://www.druginfo.adf.org.au/druginfo/fact_sheets/the_facts_about_binge_drinking/the_facts_about_binge_drinking.html",  "http://www.druginfo.adf.org.au/druginfo/fact_sheets/the_facts_about_binge_drinking/the_facts_about_binge_drinking.html"

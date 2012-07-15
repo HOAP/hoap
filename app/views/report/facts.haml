@@ -21,9 +21,8 @@
 
 %p
   Alcohol comes in all different types, colours and containers. Regardless of
-  this, an
-  %a{:href => "http://www.alcohol.gov.au/internet/alcohol/publishing.nsf/content/standard"}<
-    Australian standard drink
+  this, an Australian standard drink
+  (#{link_to_if APP_CONFIG['link'], "http://www.alcohol.gov.au/internet/alcohol/publishing.nsf/content/standard", "http://www.alcohol.gov.au/internet/alcohol/publishing.nsf/content/standard"})
   contains 10 grams or 12.5mL of pure alcohol. Here are some examples of one
   standard drink: 425ml of light beer, 285ml of full strength beer, 100ml of
   wine, 60ml of fortified wine and 30ml of spirits (a full strength can or
@@ -34,9 +33,8 @@
 %h3 Australian guidelines to reduce health risks from drinking alcohol
 
 %p
-  While there is no safe level of drinking,
-  %a{:href => "http://www.nhmrc.gov.au/your_health/healthy/alcohol/index.htm#sum"}<
-    guidelines
+  While there is no safe level of drinking, guidelines
+  (#{link_to_if APP_CONFIG['link'], "http://www.nhmrc.gov.au/your-health/alcohol-guidelines", "http://www.nhmrc.gov.au/your-health/alcohol-guidelines"})
   have been developed to help you protect your health, both physically and
   socially. The National Health and Medical Research Council (NHMRC) Australian
   guidelines to reduce health risks from drinking alcohol, recommend:
@@ -95,8 +93,8 @@
 
 %p
   Alcohol impairs your judgement, which can lead to doing something you
-  wouldn't when sober. Some NSW
-  %a{:href => "http://www.alcoholinfo.nsw.gov.au/nsw_legislation"}< laws
+  wouldn't when sober. Some NSW laws
+  (#{link_to_if APP_CONFIG['link'], "http://www.alcoholinfo.nsw.gov.au/nsw_legislation", "http://www.alcoholinfo.nsw.gov.au/nsw_legislation"})
   to keep in mind are:
 
 %ul
@@ -116,8 +114,8 @@
   subject to a 0.02 or zero limit.
 
 %p
-  %a{:href => "http://www.rta.nsw.gov.au/usingroads/penalties/alcoholanddrugs.html"}<
-    Drink driving
+  Drink driving
+  (#{link_to_if APP_CONFIG['link'], "http://www.rta.nsw.gov.au/usingroads/penalties/alcoholanddrugs.html", "http://www.rta.nsw.gov.au/usingroads/penalties/alcoholanddrugs.html"})
   is taken very seriously. If you test over the limit at the roadside you will
   be arrested, taken to a Police station for evidentiary breath analysis,
   charged by Police, finger printed, photographed and you will have to appear

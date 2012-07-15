@@ -1,0 +1,4 @@
+# Custom configuration items
+
+# Link URLs in report views
+link: true
