@@ -264,7 +264,7 @@ class Participant < ActiveRecord::Base
   end
 
   def audit_only?
-    a = Answer.where(:participant_id => self.id, :page => 5).pluck(:value)
+    a = Answer.where(:participant_id => self.id, :page => 7).pluck(:value)
     return a[0] == "No"
   end
 
@@ -286,7 +286,7 @@ class Participant < ActiveRecord::Base
   def show_peer_dpo?
     if self.peer_dpo.nil?
       a = Answer.where(:participant_id => self.id, :page => 2).order("id ASC").limit(2).pluck(:value)
-      a += Answer.where(:participant_id => self.id, :page => 4).order("id ASC").limit(2).pluck(:value)
+      a += Answer.where(:participant_id => self.id, :page => 5).order("id ASC").limit(2).pluck(:value)
       self.peer_dpo = a[3].to_i >= @@avg_dpo[a[0]][a[1]]
     end
     return self.peer_dpo
