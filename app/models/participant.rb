@@ -80,7 +80,7 @@ class Participant < ActiveRecord::Base
         self.completed = true
       elsif self.page == 7 && answer[0] =~ /no/i
         # Skip LDQ if not drunk any alcohol in last 4 weeks.
-        self.page += 1
+        self.page += 2
       end
     elsif self.page == 5
       # Check AUDIT-C
