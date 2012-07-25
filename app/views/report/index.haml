@@ -43,15 +43,16 @@
     %span.report= number_to_currency @participant.money[1]
     on alcohol in the last year.
 
-  - if @participant.display_dpo? || @participant.display_dpw?
-    %h3 Your Drinking Amount Compared
+- if @participant.display_dpo? || @participant.display_dpw?
+  %h3 Your Drinking Amount Compared
 
-    - if @participant.display_dpo?
-      = render :partial => 'drinks_per_occasion'
+  - if @participant.display_dpo?
+    = render :partial => 'drinks_per_occasion'
 
-    - if @participant.display_dpw?
-      = render :partial => 'drinks_per_week'
+  - if @participant.display_dpw?
+    = render :partial => 'drinks_per_week'
 
+- unless @participant.audit_only?
   %h3 Your Risk Of Alcohol Dependence
 
   %p
