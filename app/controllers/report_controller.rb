@@ -13,6 +13,9 @@ class ReportController < ApplicationController
   def tips
   end
 
+  def finish
+  end
+
   def dpo_graph
     send_data(@participant.dpo_graph, :type => 'image/png', :disposition => 'inline', :filename => 'std_drinks_graph.png')
   end

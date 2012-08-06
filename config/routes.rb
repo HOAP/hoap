@@ -16,8 +16,6 @@ Hoap::Application.routes.draw do
 
   match "survey/save/:page/:key" => 'survey#save', :as => :save, :via => :post
 
-  match "survey/feedback/:page/:key" => 'survey#feedback', :as => :feedback
-
   resource :user_session
 
   get "users/index"
@@ -31,6 +29,8 @@ Hoap::Application.routes.draw do
   match "tips/:key" => 'report#tips', :as => :tips
 
   match "support/:key" => 'report#support', :as => :support
+
+  match "finish/:key" => 'report#finish', :as => :finish
 
   match "report/dpo_graph/:key" => 'report#dpo_graph', :as => :dpo_graph
 
