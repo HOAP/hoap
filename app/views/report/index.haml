@@ -36,15 +36,15 @@
       %td
         = image_tag get_speedo(@participant.bac), :alt => get_speedo_alt(@participant.bac), :size => "300x300"
 
-  %h3 Your Money
+%h3 Your Money
 
-  %p
-    Depending on where you buy your drinks (i.e. a bottle store, pub or club),
-    you have spent between
-    %span.report= number_to_currency @participant.money[0]
-    and
-    %span.report= number_to_currency @participant.money[1]
-    on alcohol in the last year.
+%p
+  Depending on where you buy your drinks (i.e. a bottle store, pub or club),
+  you have spent between
+  %span.report= number_to_currency @participant.money[0]
+  and
+  %span.report= number_to_currency @participant.money[1]
+  on alcohol in the last year.
 
 - if @participant.display_dpo? || @participant.display_dpw?
   %h3 Your Drinking Amount Compared
