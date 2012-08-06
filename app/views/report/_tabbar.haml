@@ -1,6 +1,6 @@
 %ul.tab
-  %li{:class => active == :feedback ? "active" : ""}
-    = link_to raw('<span>Feedback</span>'), report_path(@participant.key)
+  %li{:class => active == :results ? "active" : ""}
+    = link_to raw('<span>Results</span>'), report_path(@participant.key)
 
   %li{:class => active == :facts ? "active" : ""}
     = link_to raw('<span>Facts</span>'), facts_path(@participant.key)
