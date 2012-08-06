@@ -1,4 +1,5 @@
-= render "tabbar", :active => :results
+- unless @participant.audit_c >= 10
+  = render "tabbar", :active => :results
 
 %h1 YOUR RESULTS
 
