@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120708002627) do
+ActiveRecord::Schema.define(:version => 20120806013549) do
 
   create_table "answers", :force => true do |t|
     t.integer  "participant_id"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20120708002627) do
     t.string   "code"
     t.binary   "email"
     t.integer  "exit_code",                                              :default => 0
+    t.integer  "c_audit_c"
   end
 
   add_index "participants", ["key"], :name => "index_participants_on_key", :unique => true

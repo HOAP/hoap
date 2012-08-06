@@ -116,11 +116,14 @@ class Participant < ActiveRecord::Base
 
   # The AUDIT-C score (page 5) - a reduced AUDIT to check eligibility.
   def audit_c
-    answers = Answer.where(:participant_id => self.id, :page => 5).order("id ASC")
-    result = answers.reduce(0) do |sum, a|
-      sum + audit_score(a.question_id, a.value)
+    if self.c_audit_c.nil?
+      answers = Answer.where(:participant_id => self.id, :page => 5).order("id ASC")
+      self.c_audit_c = answers.reduce(0) do |sum, a|
+        sum + audit_score(a.question_id, a.value)
+      end
+      self.save
     end
-    return result
+    return self.c_audit_c
   end
 
   # The AUDIT score (page 5 & 6)
