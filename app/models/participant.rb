@@ -327,6 +327,7 @@ class Participant < ActiveRecord::Base
   def to_a
     results = [self.id, self.code, self.name, self.email, self.completed]
     results += [self.c_audit, self.c_bac, self.c_ldq]
+    results += [self.report_time, self.facts_time, self.support_time, self.tips_time]
     results += Answer.values(self.id)
     return results
   end
