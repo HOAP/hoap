@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120806013549) do
+ActiveRecord::Schema.define(:version => 20120807055448) do
 
   create_table "answers", :force => true do |t|
     t.integer  "participant_id"
@@ -23,24 +23,28 @@ ActiveRecord::Schema.define(:version => 20120806013549) do
   end
 
   create_table "participants", :force => true do |t|
-    t.string   "key",        :limit => 12,                                                  :null => false
+    t.string   "key",          :limit => 12,                                                  :null => false
     t.string   "name"
-    t.integer  "page",                                                   :default => 1
-    t.boolean  "completed",                                              :default => false
+    t.integer  "page",                                                     :default => 1
+    t.boolean  "completed",                                                :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "c_audit"
-    t.decimal  "c_bac",                    :precision => 3, :scale => 2
+    t.decimal  "c_bac",                      :precision => 3, :scale => 2
     t.string   "c_money"
     t.integer  "c_ldq"
-    t.decimal  "c_dpw",                    :precision => 5, :scale => 2
+    t.decimal  "c_dpw",                      :precision => 5, :scale => 2
     t.string   "peergroup"
     t.boolean  "peer_dpo"
     t.boolean  "peer_dpw"
     t.string   "code"
     t.binary   "email"
-    t.integer  "exit_code",                                              :default => 0
+    t.integer  "exit_code",                                                :default => 0
     t.integer  "c_audit_c"
+    t.integer  "report_time",                                              :default => 0
+    t.integer  "facts_time",                                               :default => 0
+    t.integer  "support_time",                                             :default => 0
+    t.integer  "tips_time",                                                :default => 0
   end
 
   add_index "participants", ["key"], :name => "index_participants_on_key", :unique => true
