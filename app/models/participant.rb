@@ -307,11 +307,13 @@ class Participant < ActiveRecord::Base
     if @@public_key.nil?
       @@public_key = OpenSSL::PKey::RSA.new(File.read("config/public.pem"))
     end
-    self[:email] = @@public_key.public_encrypt(email)
+    unless email.blank?
+      self[:email] = @@public_key.public_encrypt(email)
+    end
   end
 
   def email
-    if self[:email].nil?
+    if self[:email].blank?
       return nil
     end
     if @@private_key.nil?
