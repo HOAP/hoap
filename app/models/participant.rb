@@ -6,16 +6,16 @@ class Participant < ActiveRecord::Base
   @@control_pct = 50
 
   @@audit_values = {
-    7 => {"Never or almost never" => 0, "Less than once a month" => 1, "Once a month" => 1, "Once every two weeks" => 2, "Once a week" => 2, "Two or three times a week" => 3, "Four or five times a week" => 4, "Six or seven times a week" => 4},
-    8 => {"1" => 0, "2" => 0, "3" => 1, "4" => 1, "5" => 2, "6" => 2, "7" => 3, "8" => 3, "9" => 3, "10" => 4, "11" => 4, "12" => 4, "13" => 4, "14" => 4, "15" => 4, "16" => 4, "17" => 4, "18" => 4, "19" => 4, "20" => 4, "21" => 4, "22" => 4, "23" => 4, "24" => 4, "25-29" => 4, "30-34" => 4, "35-39" => 4, "40-49" => 4, "50 or more" => 4},
-    9 => {"Never" => 0, "Once or twice a year" => 1, "Less than monthly" => 1, "Monthly" => 2, "Weekly" => 3, "Daily or almost daily" => 4},
+    6 => {"Never or almost never" => 0, "Less than once a month" => 1, "Once a month" => 1, "Once every two weeks" => 2, "Once a week" => 2, "Two or three times a week" => 3, "Four or five times a week" => 4, "Six or seven times a week" => 4},
+    7 => {"1" => 0, "2" => 0, "3" => 1, "4" => 1, "5" => 2, "6" => 2, "7" => 3, "8" => 3, "9" => 3, "10" => 4, "11" => 4, "12" => 4, "13" => 4, "14" => 4, "15" => 4, "16" => 4, "17" => 4, "18" => 4, "19" => 4, "20" => 4, "21" => 4, "22" => 4, "23" => 4, "24" => 4, "25-29" => 4, "30-34" => 4, "35-39" => 4, "40-49" => 4, "50 or more" => 4},
+    8 => {"Never" => 0, "Once or twice a year" => 1, "Less than monthly" => 1, "Monthly" => 2, "Weekly" => 3, "Daily or almost daily" => 4},
+    9 => {"Never" => 0, "Less than monthly" => 1, "Monthly" => 2, "Weekly" => 3, "Daily or almost daily" => 4},
     10 => {"Never" => 0, "Less than monthly" => 1, "Monthly" => 2, "Weekly" => 3, "Daily or almost daily" => 4},
     11 => {"Never" => 0, "Less than monthly" => 1, "Monthly" => 2, "Weekly" => 3, "Daily or almost daily" => 4},
     12 => {"Never" => 0, "Less than monthly" => 1, "Monthly" => 2, "Weekly" => 3, "Daily or almost daily" => 4},
     13 => {"Never" => 0, "Less than monthly" => 1, "Monthly" => 2, "Weekly" => 3, "Daily or almost daily" => 4},
-    14 => {"Never" => 0, "Less than monthly" => 1, "Monthly" => 2, "Weekly" => 3, "Daily or almost daily" => 4},
-    15 => {"No" => 0, "Yes, but not in the last year" => 2, "Yes, during the last year" => 4},
-    16 => {"No" => 0, "Yes, but not in the last year" => 2, "Yes, during the last year" => 4}
+    14 => {"No" => 0, "Yes, but not in the last year" => 2, "Yes, during the last year" => 4},
+    15 => {"No" => 0, "Yes, but not in the last year" => 2, "Yes, during the last year" => 4}
   }
 
   @@avg_dpo = {
@@ -151,13 +151,13 @@ class Participant < ActiveRecord::Base
   end
 
   def typical_drinks
-    Answer.where(:participant_id => self.id, :question_id => 8).select(:value).first.value
+    Answer.where(:participant_id => self.id, :question_id => 7).select(:value).first.value
   end
 
   def dpw
     if self.c_dpw.nil?
       drinks = typical_drinks.to_i
-      frequency = Answer.where(:participant_id => self.id, :question_id => 7).select(:value).first.value
+      frequency = Answer.where(:participant_id => self.id, :question_id => 6).select(:value).first.value
       case frequency
       when /^Never/
         mult = 0
