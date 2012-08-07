@@ -330,4 +330,12 @@ class Participant < ActiveRecord::Base
     results += Answer.values(self.id)
     return results
   end
+
+  def increment_time(page, time)
+    if page =~ /^report|facts|support|tips$/
+      self[(page + "_time").to_sym] += time.to_i
+      self.save
+    end
+    return self[(page + "_time").to_sym]
+  end
 end

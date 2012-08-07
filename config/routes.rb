@@ -32,6 +32,8 @@ Hoap::Application.routes.draw do
 
   match "finish/:key" => 'report#finish', :as => :finish
 
+  match "time/:page/:key" => 'report#time', :as => :time
+
   match "report/dpo_graph/:key" => 'report#dpo_graph', :as => :dpo_graph
 
   match "report/dpw_graph/:key" => 'report#dpw_graph', :as => :dpw_graph

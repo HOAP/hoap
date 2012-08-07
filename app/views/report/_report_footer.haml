@@ -1,0 +1,11 @@
+= form_tag time_url(key: @participant.key, page: page), remote: true do
+  = hidden_field_tag "timer", 0, :class => "timer"
+
+= form_tag finish_url(:key => @participant.key) do
+  %div{:style => "width: 100%; margin: 4em; text-align: center;"}
+    = hidden_field_tag "page_timer", 0, :class => "timer"
+    = hidden_field_tag "page", page
+    = submit_tag "Finish Survey", :style => "font-size: 160%"
+
+:javascript
+  $(configureReport);

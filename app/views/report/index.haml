@@ -77,6 +77,4 @@
     = link_to 'SUPPORT', support_path(@participant.key)
     page for options.
 
-= form_tag finish_url(:key => @participant.key) do
-  %div{:style => "width: 100%; margin: 4em; text-align: center;"}
-    = submit_tag "Finish Survey", :style => "font-size: 160%"
+= render 'report_footer', page: "report"

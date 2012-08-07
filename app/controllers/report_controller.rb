@@ -14,6 +14,12 @@ class ReportController < ApplicationController
   end
 
   def finish
+    @participant.increment_time(params[:page], params[:page_timer])
+  end
+
+  def time
+    @participant.increment_time(params[:page], params[:timer])
+    render :text => "1"
   end
 
   def dpo_graph
