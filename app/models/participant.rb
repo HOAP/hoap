@@ -150,15 +150,10 @@ class Participant < ActiveRecord::Base
     self.c_ldq
   end
 
-  def typical_drinks
-    Answer.where(:participant_id => self.id, :question_id => 7).select(:value).first.value
-  end
-
   def dpw
     if self.c_dpw.nil?
-      drinks = typical_drinks.to_i
-      frequency = Answer.where(:participant_id => self.id, :question_id => 6).select(:value).first.value
-      case frequency
+      values = Answer.where(:participant_id => self.id, :page => 5).order("id ASC").pluck(:value)
+      case values[0]
       when /^Never/
         mult = 0
       when /^(Less)|(Once a month)/
@@ -174,7 +169,7 @@ class Participant < ActiveRecord::Base
       when /^Six/
         mult = 6.5
       end
-      self.c_dpw = drinks * mult
+      self.c_dpw = values[1].to_i * mult
     end
     self.c_dpw
   end
