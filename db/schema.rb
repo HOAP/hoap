@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120807055448) do
+ActiveRecord::Schema.define(:version => 20120809083706) do
 
   create_table "answers", :force => true do |t|
     t.integer  "participant_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20120807055448) do
     t.integer  "facts_time",                                               :default => 0
     t.integer  "support_time",                                             :default => 0
     t.integer  "tips_time",                                                :default => 0
+    t.string   "report_copy",  :limit => 5
   end
 
   add_index "participants", ["key"], :name => "index_participants_on_key", :unique => true
