@@ -1,6 +1,3 @@
-- unless @participant.audit_c >= 10
-  = render "tabbar", :active => :results
-
 %h1 YOUR RESULTS
 
 %p Thanks for completing the survey #{@participant.name}.
@@ -73,8 +70,15 @@
     != ldq_suggestion(@participant.ldq)
 
   %p#next_page
-    Please see the
-    = link_to 'SUPPORT', support_path(@participant.key)
-    page for options.
+    Please see the SUPPORT page for options.
 
-= render 'report_footer', page: "report"
+= form_tag facts_url(:key => @participant.key) do
+  %div{:style => "width: 100%; margin: 4em; text-align: center;"}
+    = hidden_field_tag "timer", 0, :class => "timer"
+    %p
+      Please send me a copy of this feedback:
+      = select :participant, :report_copy, {"Email" => "email", "Post" => "post", "No thanks" => "no"}, {:include_blank => true}, :class => "required"
+    = submit_tag "Continue", :style => "font-size: 160%"
+
+:javascript
+  $(configureReport);

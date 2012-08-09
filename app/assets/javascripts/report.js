@@ -2,13 +2,33 @@
 // All this logic will automatically be available in application.js.
 
 function configureReport() {
+  setupTimer();
+  jQuery.validator.messages.required = "Please select an option";
+  $(document).ready(function(){
+    $("form").validate({
+      highlight: function(element, errorClass, validClass) {
+        $(element).parents("p,tr").addClass("errorCell");
+      },
+      unhighlight: function(element, errorClass, validClass) {
+        $(element).parents("p,tr").removeClass("errorCell");
+      },
+      invalidHandler: missedAlert
+    });
+  });
+}
+
+function configureInfo() {
+  setupTimer();
+  $("a").on("click", function() {
+    $("form").first().submit();
+  });
+}
+
+function setupTimer() {
   timetaken = 0;
   var d = new Date();
   starttime = Math.round(d.getTime() / 1000);
   window.setInterval(updateTime, 1000);
-  $("a").on("click", function() {
-    $("form").first().submit();
-  });
 }
 
 function updateTime() {

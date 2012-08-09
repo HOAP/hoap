@@ -5,6 +5,10 @@ class ReportController < ApplicationController
   end
 
   def facts
+    unless params[:participant].blank?
+      @participant.update_attributes(params[:participant])
+      @participant.increment_time("report", params[:timer])
+    end
   end
 
   def support
