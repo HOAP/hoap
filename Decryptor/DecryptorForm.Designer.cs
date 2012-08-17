@@ -68,15 +68,19 @@
             this.fileButton.TabIndex = 0;
             this.fileButton.Text = "File...";
             this.fileButton.UseVisualStyleBackColor = true;
+            this.fileButton.Click += new System.EventHandler(this.fileButton_Click);
             // 
             // dataFileBox
             // 
+            this.dataFileBox.AllowDrop = true;
             this.dataFileBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.dataFileBox.Location = new System.Drawing.Point(7, 20);
             this.dataFileBox.Name = "dataFileBox";
             this.dataFileBox.Size = new System.Drawing.Size(515, 20);
             this.dataFileBox.TabIndex = 1;
+            this.dataFileBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.dataFileBox_DragDrop);
+            this.dataFileBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.dataFileBox_DragEnter);
             // 
             // DecryptorForm
             // 
