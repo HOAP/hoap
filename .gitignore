@@ -1,2 +1,4 @@
 *.suo
 Decryptor/bin
+Decryptor/obj
+private.xml
