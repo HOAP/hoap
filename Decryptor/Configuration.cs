@@ -7,13 +7,18 @@ using System.ComponentModel;
 
 namespace Decryptor
 {
-    class Configuration : INotifyPropertyChanged
+    public class Configuration : INotifyPropertyChanged
     {
         private string dataPath;
 
         public Configuration()
         {
             dataPath = global::Decryptor.Properties.Settings.Default.DataPath;
+            if (this.dataPath == null || this.dataPath == String.Empty)
+            {
+                this.dataPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                SaveConfiguration();
+            }
         }
 
         public string DataPath
