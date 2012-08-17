@@ -37,7 +37,8 @@
             // 
             // decryptButton
             // 
-            this.decryptButton.Location = new System.Drawing.Point(199, 74);
+            this.decryptButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.decryptButton.Location = new System.Drawing.Point(540, 74);
             this.decryptButton.Name = "decryptButton";
             this.decryptButton.Size = new System.Drawing.Size(75, 23);
             this.decryptButton.TabIndex = 0;
@@ -46,18 +47,22 @@
             // 
             // gbDataFile
             // 
+            this.gbDataFile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gbDataFile.Controls.Add(this.dataFileBox);
             this.gbDataFile.Controls.Add(this.fileButton);
             this.gbDataFile.Location = new System.Drawing.Point(12, 12);
             this.gbDataFile.Name = "gbDataFile";
-            this.gbDataFile.Size = new System.Drawing.Size(268, 56);
+            this.gbDataFile.Size = new System.Drawing.Size(609, 56);
             this.gbDataFile.TabIndex = 1;
             this.gbDataFile.TabStop = false;
             this.gbDataFile.Text = "Data File";
             // 
             // fileButton
             // 
-            this.fileButton.Location = new System.Drawing.Point(187, 18);
+            this.fileButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.fileButton.Location = new System.Drawing.Point(528, 18);
             this.fileButton.Name = "fileButton";
             this.fileButton.Size = new System.Drawing.Size(75, 23);
             this.fileButton.TabIndex = 0;
@@ -66,16 +71,18 @@
             // 
             // dataFileBox
             // 
+            this.dataFileBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.dataFileBox.Location = new System.Drawing.Point(7, 20);
             this.dataFileBox.Name = "dataFileBox";
-            this.dataFileBox.Size = new System.Drawing.Size(174, 20);
+            this.dataFileBox.Size = new System.Drawing.Size(515, 20);
             this.dataFileBox.TabIndex = 1;
             // 
             // DecryptorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 104);
+            this.ClientSize = new System.Drawing.Size(631, 104);
             this.Controls.Add(this.gbDataFile);
             this.Controls.Add(this.decryptButton);
             this.Name = "DecryptorForm";
