@@ -13,6 +13,8 @@ namespace Decryptor
         [STAThread]
         static void Main()
         {
+            Configuration config = new Configuration();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new DecryptorForm());
