@@ -11,9 +11,14 @@ namespace Decryptor
 {
     public partial class DecryptorForm : Form
     {
-        public DecryptorForm()
+        private Configuration config;
+
+        public DecryptorForm(Configuration config)
         {
             InitializeComponent();
+
+            this.config = config;
+            dataFileBox.DataBindings.Add(new Binding("Text", config, "FilePath"));
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Decryptor
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DecryptorForm());
+            Application.Run(new DecryptorForm(config));
         }
     }
 }
