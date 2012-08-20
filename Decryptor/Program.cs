@@ -14,10 +14,11 @@ namespace Decryptor
         static void Main()
         {
             Configuration config = new Configuration();
+            Decryptor decryptor = new Decryptor();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DecryptorForm(config));
+            Application.Run(new DecryptorForm(config, decryptor));
         }
     }
 }

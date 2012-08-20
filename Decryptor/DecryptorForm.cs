@@ -13,12 +13,14 @@ namespace Decryptor
     public partial class DecryptorForm : Form
     {
         private Configuration config;
+        private Decryptor decryptor;
 
-        public DecryptorForm(Configuration config)
+        public DecryptorForm(Configuration config, Decryptor decryptor)
         {
             InitializeComponent();
 
             this.config = config;
+            this.decryptor = decryptor;
             dataFileBox.DataBindings.Add(new Binding("Text", config, "FilePath"));
         }
 
