@@ -1,5 +1,6 @@
 Hoap::Application.routes.draw do
   get "admin/index", :as => :admin
+  match "admin(/index)" => 'admin#index'
 
   get "admin/participant"
   post "admin/participant"
