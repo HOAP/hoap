@@ -320,7 +320,7 @@ class Participant < ActiveRecord::Base
       if File.exists?("config/private.pem")
         @@private_key = OpenSSL::PKey::RSA.new(File.read("config/private.pem"))
       else
-        return Base64.encode64(self[:email])
+        return Base64.encode64(self[:email]).gsub(/\n/, "")
       end
     end
     return @@private_key.private_decrypt(self[:email])
