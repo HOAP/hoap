@@ -150,6 +150,11 @@ class Participant < ActiveRecord::Base
     self.c_ldq
   end
 
+  def typical_drinks
+    values = Answer.where(:participant_id => self.id, :page => 5).order("id ASC").pluck(:value)
+    return values[1]
+  end
+
   def dpw
     if self.c_dpw.nil?
       values = Answer.where(:participant_id => self.id, :page => 5).order("id ASC").pluck(:value)
