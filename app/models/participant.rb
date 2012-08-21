@@ -17,6 +17,7 @@ class Participant < ActiveRecord::Base
     14 => {"No" => 0, "Yes, but not in the last year" => 2, "Yes, during the last year" => 4},
     15 => {"No" => 0, "Yes, but not in the last year" => 2, "Yes, during the last year" => 4}
   }
+  @@audit_values.default = 0
 
   @@avg_dpo = {
     "Male" => {"18-19" => 5.5, "20-24" => 3.5, "25-29" => 3.5, "30-34" => 3.5, "35-39" => 3.5, "40-44" => 3.5, "45-49" => 3.5, "50-54" => 3.5, "55-59" => 1.5, "60-64" => 1.5, "65-69" => 1.5, "70-74" => 1.5, "75-79" => 1.5, "80-84" => 1.5, "85+" => 1.5},
@@ -339,10 +340,12 @@ class Participant < ActiveRecord::Base
   end
 
   def increment_time(page, time)
+    result = 0
     if page =~ /^report|facts|support|tips$/
       self[(page + "_time").to_sym] += time.to_i
       self.save
+      result = self[(page + "_time").to_sym]
     end
-    return self[(page + "_time").to_sym]
+    return result
   end
 end
