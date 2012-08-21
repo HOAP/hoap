@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using Kent.Boogaart.KBCsv;
 
 namespace Decryptor
 {
@@ -57,6 +58,41 @@ namespace Decryptor
             else
             {
                 e.Effect = DragDropEffects.None;
+            }
+        }
+
+        private void decryptButton_Click(object sender, EventArgs e)
+        {
+            HeaderRecord header;
+            List<string> data;
+            List<IList<string>> rows = new List<IList<string>>();
+            int idx;
+            if (config.FilePath != null && config.FilePath != String.Empty)
+            {
+                using (CsvReader reader = new CsvReader(config.FilePath))
+                {
+                    header = reader.ReadHeaderRecord();
+                    idx = header.IndexOf("Email");
+                    DataRecord row;
+                    while ((row = reader.ReadDataRecord()) != null)
+                    {
+                        data = row.Values.ToList();
+                        if (data[idx] != null && data[idx] != String.Empty && !data[idx].Contains('@'))
+                        {
+                            data[idx] = decryptor.DecryptString(data[idx]);
+                        }
+                        rows.Add(data);
+                    }
+                }
+                using (CsvWriter writer = new CsvWriter(config.FilePath))
+                {
+                    writer.WriteHeaderRecord(header);
+                    foreach (IList<string> row in rows)
+                    {
+                        writer.WriteDataRecord(row);
+                    }
+                }
+                MessageBox.Show("All done!", "Success", MessageBoxButtons.OK);
             }
         }
     }

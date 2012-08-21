@@ -44,6 +44,7 @@
             this.decryptButton.TabIndex = 0;
             this.decryptButton.Text = "Decrypt";
             this.decryptButton.UseVisualStyleBackColor = true;
+            this.decryptButton.Click += new System.EventHandler(this.decryptButton_Click);
             // 
             // gbDataFile
             // 
