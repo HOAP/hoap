@@ -24,11 +24,7 @@ class SurveyController < ApplicationController
 
   def page
     if @participant.completed
-      if @participant.exit_code == 0
-        redirect_to @participant.current_path
-      else
-        render "exit#{@participant.exit_code}"
-      end
+      redirect_to @participant.current_path
     else
       @questions = Question.find_for(@participant)
       @answers = Answer.find_for(@participant)

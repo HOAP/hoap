@@ -107,8 +107,12 @@ class Participant < ActiveRecord::Base
 
   # Return the current URL the participant should be directed to.
   def current_path
-    if self.completed && self.exit_code == 0
-      return report_path(self.key)
+    if self.completed
+      if self.exit_code == 0
+        return report_path(self.key)
+      else
+        return finish_path(self.key)
+      end
     else
       return page_path(self.key)
     end

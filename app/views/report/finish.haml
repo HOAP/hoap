@@ -1,5 +1,5 @@
-%div{:style => "text-align: center; font-size: 200%;"}
-  - if @participant.audit_c >= 10
+- if @participant.audit_c >= 10
+  %div{:style => "text-align: center; font-size: 200%;"}
     %p
       Your score on the screening test suggests you may have impaired control
       over your drinking.
@@ -12,7 +12,4 @@
       If you would like to be referred to a specialist (here at the Ambulatory
       Care Centre) for further assessment, please let the experiment know.
 
-  %p You have completed the survey.
-  %p Thank you for your time today.
-  %p
-    We will send you a similar brief survey 6 months from now.
+= render :partial => "exit#{@participant.exit_code}"
