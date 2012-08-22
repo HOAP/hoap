@@ -20,6 +20,10 @@ p#next_page {
   display: none;
 }
 
+form {
+  display: none;
+}
+
 h1, h2 {
   text-align: center;
   line-height: 1.2;
