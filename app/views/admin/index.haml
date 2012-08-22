@@ -5,3 +5,11 @@
   = pluralize @count, "participant has", "participants have"
   done the survey.
   = link_to 'Export answers', :action => :export
+
+%p
+  <b>Today's Reports:</b>
+
+%ol
+  - @participants.each do |pp|
+    %li
+      = link_to pp.code, report_url(:key => pp.key)
