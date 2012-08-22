@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120809083706) do
+ActiveRecord::Schema.define(:version => 20120822043207) do
 
   create_table "answers", :force => true do |t|
     t.integer  "participant_id"
@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(:version => 20120809083706) do
     t.boolean  "peer_dpo"
     t.boolean  "peer_dpw"
     t.string   "code"
-    t.binary   "email"
     t.integer  "exit_code",                                                :default => 0
     t.integer  "c_audit_c"
     t.integer  "report_time",                                              :default => 0
@@ -46,6 +45,8 @@ ActiveRecord::Schema.define(:version => 20120809083706) do
     t.integer  "support_time",                                             :default => 0
     t.integer  "tips_time",                                                :default => 0
     t.string   "report_copy",  :limit => 5
+    t.binary   "email"
+    t.integer  "appointment",                                              :default => 0
   end
 
   add_index "participants", ["key"], :name => "index_participants_on_key", :unique => true

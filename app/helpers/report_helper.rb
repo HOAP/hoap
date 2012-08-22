@@ -51,4 +51,8 @@ module ReportHelper
       "At a blood alcohol level of 0.15 and above you are 380 times more likely to be killed in a single vehicle accident."
     end
   end
+
+  def appointment_values
+    {"Yes" => 1, "I'd like someone from Hunter New England Health to phone me to arrange another time because I cannot attend the clinic on a Friday afternoon" => 2, "Please ask me again 3 months from now" => 3, "No" => 4}
+  end
 end

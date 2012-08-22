@@ -333,7 +333,7 @@ class Participant < ActiveRecord::Base
 
   def to_a
     results = [self.id, self.code, self.name, self.email, self.completed]
-    results += [self.c_audit, self.c_bac, self.c_ldq]
+    results += [self.c_audit, self.c_bac, self.c_ldq, self.appointment_type]
     results += [self.report_time, self.facts_time, self.support_time, self.tips_time]
     results += Answer.values(self.id)
     return results
@@ -347,5 +347,20 @@ class Participant < ActiveRecord::Base
       result = self[(page + "_time").to_sym]
     end
     return result
+  end
+
+  def appointment_type
+    case self[:appointment]
+    when 0
+      "N/A"
+    when 1
+      "Yes"
+    when 2
+      "Cannot attend Friday"
+    when 3
+      "Contact in 3 months"
+    when 4
+      "No"
+    end
   end
 end

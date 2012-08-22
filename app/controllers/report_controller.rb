@@ -18,7 +18,11 @@ class ReportController < ApplicationController
   end
 
   def finish
-    @participant.increment_time(params[:page], params[:page_timer])
+    if !params[:page].blank?
+      @participant.increment_time(params[:page], params[:page_timer])
+    else
+      @participant.update_attributes(params[:participant])
+    end
   end
 
   def time
