@@ -332,8 +332,8 @@ class Participant < ActiveRecord::Base
   end
 
   def to_a
-    results = [self.id, self.code, self.name, self.email, self.completed]
-    results += [self.c_audit, self.c_bac, self.c_ldq, self.appointment_type]
+    results = [self.id, self.code, self.name, self.email, self.completed, self.exit_type]
+    results += [self.c_audit, self.c_bac, self.c_ldq, self.report_copy, self.appointment_type]
     results += [self.report_time, self.facts_time, self.support_time, self.tips_time]
     results += Answer.values(self.id)
     return results
@@ -361,6 +361,25 @@ class Participant < ActiveRecord::Base
       "Contact in 3 months"
     when 4
       "No"
+    end
+  end
+
+  def exit_type
+    case self.exit_code
+    when 0
+      if self.completed
+        "Finished"
+      else
+        "Incomplete"
+      end
+    when 1
+      "Ineligible: no alcohol"
+    when 2
+      "Ineligible: in treatment"
+    when 3
+      "Ineligible: sensible"
+    when 4
+      "Control"
     end
   end
 end

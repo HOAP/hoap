@@ -19,7 +19,8 @@ class AdminController < ApplicationController
   def export
     filename = "HOAP-#{DateTime.now.strftime("%Y%m%d%H%M")}.csv"
     participants = Participant.order("id ASC")
-    header = %w{ParticipantID Code Name Email Completed AUDIT BAC LDQ DAOCAppoint ReportTime FactsTime SupportTime TipsTime}
+    header = %w{ParticipantID Code Name Email Completed CompletionType AUDIT}
+    header += %w{BAC LDQ ReportCopy DAOCAppoint ReportTime FactsTime SupportTime TipsTime}
     Question.order("id ASC").pluck(:page).uniq.each do |page|
       Question.count(:conditions => {:page => page}).times do |q|
         header << "Pg#{page}Q#{q + 1}"
