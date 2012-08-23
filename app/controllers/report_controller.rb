@@ -44,6 +44,8 @@ class ReportController < ApplicationController
     @participant = nil
     if params[:key].present? && params[:key] =~ /^[0-9a-f]{12}$/i
       @participant = Participant.where(:key => params[:key]).first
+    elsif params[:key].present?
+      @participant = Participant.where(:code => params[:key]).first
     end
     if @participant.nil?
       flash[:error] = "Unknown participant code."
