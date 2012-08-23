@@ -12,4 +12,4 @@
 %ol
   - @participants.each do |pp|
     %li
-      = link_to pp.code, report_url(:key => pp.key)
+      = link_to pp.code, report_url(:key => pp.key) + ".pdf"
