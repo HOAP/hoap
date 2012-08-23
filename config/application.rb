@@ -58,7 +58,7 @@ module Hoap
     config.assets.version = '1.0'
 
     # Make sure to pick up the print style
-    config.assets.precompile += ['application_print.css']
+    config.assets.precompile += ['*.css']
 
     # Do not initialise the whole app to compile assets - this fails on Heroku
     config.assets.initialize_on_precompile = false
