@@ -63,6 +63,6 @@ module Hoap
     # Do not initialise the whole app to compile assets - this fails on Heroku
     config.assets.initialize_on_precompile = false
 
-    config.middleware.use PDFKit::Middleware, {:page_size => :A4}, :only => %r[^/report]
+    config.middleware.use PDFKit::Middleware, {:print_media_type => true, :page_size => :A4}, :only => %r[^/report]
   end
 end
