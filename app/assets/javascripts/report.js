@@ -37,3 +37,18 @@ function updateTime() {
   timetaken = secs - starttime;
   $(".timer").val(timetaken);
 }
+
+function configureReferral(){
+  jQuery.validator.messages.required = "Please select an option:<br />";
+  $("form").validate({
+    highlight: function(element, errorClass, validClass) {
+      $(element).parents("p").addClass("errorCell");
+    },
+    unhighlight: function(element, errorClass, validClass) {
+      $(element).parents("p").removeClass("errorCell");
+    },
+    errorPlacement: function(error, element){
+      error.prependTo(element.parents("p"));
+    }
+  });
+}

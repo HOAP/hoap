@@ -14,10 +14,13 @@
   = form_for @participant, :url => finish_url(@participant.key) do |f|
     %p
       - appointment_values.each do |k,v|
-        = f.radio_button :appointment, v
+        = f.radio_button :appointment, v, :class => "required"
         = f.label :appointment, k, :value => v
         %br
     %p{:style => "text-align: right;"}
       = submit_tag "Continue »"
 - else
   = render :partial => "exit#{@participant.exit_code}"
+
+:javascript
+  $(configureReferral);
