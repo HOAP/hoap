@@ -38,9 +38,9 @@
 %p
   Depending on where you buy your drinks (i.e. a bottle store, pub or club),
   you have spent between
-  %span.report= number_to_currency @participant.money[0]
+  %span.report= number_to_currency @participant.money[0], :precision => 0
   and
-  %span.report= number_to_currency @participant.money[1]
+  %span.report= number_to_currency @participant.money[1], :precision => 0
   on alcohol in the last year.
 
 - if @participant.display_dpo? || @participant.display_dpw?
@@ -63,21 +63,22 @@
   %p
     Generally speaking, the higher the score the more reason for concern that
     your drinking may be out of control. Your score was
-    %strong= @participant.ldq
+    %span{:style => "color: red;"}
+      %strong= @participant.ldq
     and suggests that...
 
   %p
     != ldq_suggestion(@participant.ldq)
 
   %p#next_page
-    Please see the SUPPORT page for options.
+    Please see the SUPPORT section on the next page for options.
 
 = form_tag facts_url(:key => @participant.key) do
   %div{:style => "width: 100%; margin: 4em; text-align: center;"}
     = hidden_field_tag "timer", 0, :class => "timer"
     %p
-      Please send me a copy of this feedback:
-      = select :participant, :report_copy, {"Email" => "email", "Post" => "post", "No thanks" => "no"}, {:include_blank => true}, :class => "required"
+      Would you like us to send you a copy of this feedback?
+      = select :participant, :report_copy, {"Yes, by email and post" => "both", "Yes, by email" => "email", "Yes, by post" => "post", "No thanks" => "no"}, {:include_blank => true}, :class => "required"
     = submit_tag "Continue", :style => "font-size: 160%"
 
 :javascript
