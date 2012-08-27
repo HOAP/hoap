@@ -30,11 +30,7 @@ class ReportController < ApplicationController
     if @participant.audit_c >= 10 && @participant.appointment == 0
       redirect_to referral_url(:key => @participant.key)
     else
-      if @participant.exit_code == 0
-        redirect_to facts_url(:key => @participant.key)
-      else
-        redirect_to finish_url(:key => @participant.key)
-      end
+      redirect_to facts_url(:key => @participant.key)
     end
   end
 
