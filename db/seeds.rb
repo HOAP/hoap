@@ -42,7 +42,7 @@ pages = [
     {:page => 8, :text => "Weight", :atype => "T"}
   ],
   [
-    {:page => 9, :text => "Do you find your self thinking about when you will next be able to have another drink?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
+    {:page => 9, :text => "Do you find yourself thinking about when you will next be able to have another drink?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
     {:page => 9, :text => "Is drinking more important than anything else you might do during the day?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
     {:page => 9, :text => "Do you feel your need for drink is too strong to control?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
     {:page => 9, :text => "Do you plan your days around getting drink and drinking?", :atype => "S", :values => [["Never", "0"], ["Sometimes", "1"], ["Often", "2"], ["Nearly always", "3"]]},
