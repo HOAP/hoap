@@ -5,10 +5,6 @@ class ReportController < ApplicationController
   end
 
   def facts
-    unless params[:participant].blank?
-      @participant.update_attributes(params[:participant])
-      @participant.increment_time("report", params[:timer])
-    end
   end
 
   def support
@@ -17,11 +13,24 @@ class ReportController < ApplicationController
   def tips
   end
 
+  def referral
+  end
+
   def finish
     if !params[:page].blank?
       @participant.increment_time(params[:page], params[:page_timer])
+    end
+  end
+
+  def save
+    @participant.update_attributes(params[:participant])
+    if !params[:page].blank?
+      @participant.increment_time(params[:page], params[:page_timer])
+    end
+    if @participant.audit_c >= 10 && @participant.appointment == 0
+      redirect_to referral_url(:key => @participant.key)
     else
-      @participant.update_attributes(params[:participant])
+      redirect_to facts_url(:key => @participant.key)
     end
   end
 

@@ -31,7 +31,11 @@ Hoap::Application.routes.draw do
 
   match "support/:key" => 'report#support', :as => :support
 
+  match "referral/:key" => 'report#referral', :as => :referral
+
   match "finish/:key" => 'report#finish', :as => :finish
+
+  match "report/save/:key" => 'report#save', :as => :report_save
 
   match "time/:page/:key" => 'report#time', :as => :time
 
