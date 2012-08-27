@@ -10,7 +10,7 @@
 %p
   Would you like Hunter New England Health staff to send you a letter with
   an appointment for this clinic?
-= form_for @participant, :url => finish_url(@participant.key) do |f|
+= form_for @participant, :url => report_save_url(@participant.key) do |f|
   %p
     - appointment_values.each do |k,v|
       = f.radio_button :appointment, v, :class => "required"
