@@ -6,6 +6,7 @@ Hoap::Application.routes.draw do
   post "admin/participant"
 
   get "admin/export"
+  get "admin/reports", :as => :all_reports
 
   get "survey/index"
 

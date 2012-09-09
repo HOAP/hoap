@@ -13,3 +13,6 @@
   - @participants.each do |pp|
     %li
       = link_to pp.code, report_url(:key => pp.code) + ".pdf"
+
+%p
+  = link_to 'All Reports', all_reports_url

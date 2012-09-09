@@ -8,6 +8,10 @@ class AdminController < ApplicationController
     @participants = Participant.where("created_at >= ? AND exit_code = 0 AND completed = true", 1.day.ago).order("id ASC").select("code, key")
   end
 
+  def reports
+    @participants = Participant.where(:exit_code => 0, :completed => true).order("id ASC").select("code, key")
+  end
+
   def participant
     count = params[:count].to_i
     count.times do
