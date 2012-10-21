@@ -16,7 +16,7 @@ pages = [
     {:page => 3, :text => "Have you had a drink containing alcohol in the <strong>LAST 12 MONTHS</strong>?", :atype => "R", :values => %w{Yes No}}
   ],
   [
-    {:page => 4, :text => "Are you currently receiving treatment for your drinking?", :atype => "R", :values => %w{Yes No}}
+    {:page => 4, :text => "Are you currently <b>receiving treatment</b> for your drinking?", :atype => "R", :values => %w{Yes No}}
   ],
   [
     {:page => 5, :text => "How often do you have a drink containing alcohol?", :atype => "S", :values => ["Never or almost never", "Less than once a month", "Once a month", "Once every two weeks", "Once a week", "Two or three times a week", "Four or five times a week", "Six or seven times a week"]},

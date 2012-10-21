@@ -1,10 +1,7 @@
-%h1 Current Care
+%p &nbsp;
+%p &nbsp;
 
-%p
-  - if @participant.name.nil? || @participant.name == ""
-    Thanks,
-  - else
-    Thanks #{@participant.name},
+%h1 Current Care
 
 = form_tag save_url(:page => 4, :key => @participant.key) do
   - @question, @answer = @questions[0], @answers[0]
