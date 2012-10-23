@@ -1,0 +1,10 @@
+%h1 Incomplete Participants
+
+%p
+  A list of all participants who have not completed the survey and have given
+  us an email address.
+
+%ol
+  - @incomplete.each do |pp|
+    %li
+      = link_to pp.code, page_url(:key => pp.key)

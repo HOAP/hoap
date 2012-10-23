@@ -6,10 +6,15 @@ class AdminController < ApplicationController
   def index
     @count = Participant.where(:completed => true).count
     @participants = Participant.where("created_at >= ? AND exit_code = 0 AND completed = true", 1.day.ago).order("id ASC").select("code, key")
+    @incomplete = Participant.where("created_at >= ? AND completed = false AND email != ''", 1.day.ago).order("id ASC").select("code, key")
   end
 
   def reports
     @participants = Participant.where(:exit_code => 0, :completed => true).order("id ASC").select("code, key")
+  end
+
+  def incomplete
+    @incomplete = Participant.where("completed = false AND email != ''").order("id ASC").select("code, key")
   end
 
   def participant

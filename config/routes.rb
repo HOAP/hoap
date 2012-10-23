@@ -7,6 +7,7 @@ Hoap::Application.routes.draw do
 
   get "admin/export"
   get "admin/reports", :as => :all_reports
+  get "admin/incomplete", :as => :incomplete
 
   get "survey/index"
 

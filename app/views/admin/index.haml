@@ -16,3 +16,14 @@
 
 %p
   = link_to 'All Reports', all_reports_url
+
+%p
+  <b>Today's Incomplete Participants:</b>
+
+%ol
+  - @incomplete.each do |pp|
+    %li
+      = link_to pp.code, page_url(:key => pp.key)
+
+%p
+  = link_to 'All Incomplete Participants', incomplete_url
