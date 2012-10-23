@@ -3,7 +3,7 @@ class Participant < ActiveRecord::Base
   has_many :answers
   serialize :c_money, Array
 
-  @@control_pct = 50
+  @@control_pct = 40
 
   @@audit_values = {
     6 => {"Never or almost never" => 0, "Less than once a month" => 1, "Once a month" => 1, "Once every two weeks" => 2, "Once a week" => 2, "Two or three times a week" => 3, "Four or five times a week" => 4, "Six or seven times a week" => 4},
