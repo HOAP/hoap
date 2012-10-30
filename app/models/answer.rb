@@ -32,4 +32,11 @@ class Answer < ActiveRecord::Base
   def self.values(participant_id)
     return self.where(:participant_id => participant_id).order("id ASC").pluck(:value)
   end
+
+  def self.from_a(participant_id, ary)
+    qid = 1
+    (18..(ary.length - 1)).each do |i|
+      Answer.create(:participant_id => participant_id, :question_id => qid += 1, :value => ary[i])
+    end
+  end
 end

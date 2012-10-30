@@ -51,6 +51,31 @@ class Participant < ActiveRecord::Base
     return participant
   end
 
+  # Import participant data from an array of values (as exported by
+  # the Participant#to_a method)
+  def self.from_a(ary)
+    participant = nil
+    if self.exists?(:key => ary[2])
+      participant = Participant.where(:key => ary[2]).first
+    else
+      participant = Participant.new(:key => ary[2], :code => ary[1], :page => ary[3], :name => ary[4], :report_copy => ary[12], :report_time => ary[14].to_i, :facts_time => ary[15].to_i, :support_time => ary[16].to_i, :tips_time => ary[17].to_i)
+      if !ary[5].nil? && ary[5].length == 172
+        participant[:email] = Base64.decode64(ary[5])
+      end
+      participant.completed = (ary[6] == "true")
+      participant.set_exit_type(ary[7])
+      participant[:c_audit_c] = ary[8].to_i unless ary[8].nil?
+      participant[:c_audit] = ary[9].to_i unless ary[9].nil?
+      participant[:c_bac] = ary[10].to_i unless ary[10].nil?
+      participant[:c_ldq] = ary[11].to_i unless ary[11].nil?
+      participant.set_appointment_type(ary[13])
+      if participant.save
+        Answer.from_a(participant.id, ary)
+      end
+    end
+    return participant
+  end
+
   # Sets the current page to that of the page the participant
   # just submitted. Checks to prevent skipping ahead and to
   # ensure a valid page.
@@ -367,6 +392,21 @@ class Participant < ActiveRecord::Base
     end
   end
 
+  def set_appointment_type(txt)
+    case txt
+    when /N\/A/
+      self[:appointment] = 0
+    when /Yes/
+      self[:appointment] = 1
+    when /Friday/
+      self[:appointment] = 2
+    when /months/
+      self[:appointment] = 3
+    when /No/
+      self[:appointment] = 4
+    end
+  end
+
   def exit_type
     case self.exit_code
     when 0
@@ -383,6 +423,21 @@ class Participant < ActiveRecord::Base
       "Ineligible: sensible"
     when 4
       "Control"
+    end
+  end
+
+  def set_exit_type(txt)
+    case txt
+    when /(Finished)|(Incomplete)/
+      self.exit_code = 0
+    when /no alcohol/
+      self.exit_code = 1
+    when /in treatment/
+      self.exit_code = 2
+    when /sensible/
+      self.exit_code = 3
+    else
+      self.exit_code = 4
     end
   end
 end
