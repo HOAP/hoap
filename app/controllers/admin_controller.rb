@@ -43,4 +43,31 @@ class AdminController < ApplicationController
     end
     send_data(results, :type => 'text/csv', :disposition => 'inline', :filename => filename)
   end
+
+  def import
+    error = false
+    if params[:data_file].content_type.chomp =~ /^text\/csv$/
+      data = CSV.parse(params[:data_file].read)
+      data.shift # Discard the header row
+      if data[0][5] =~ /@/
+      else
+        data.each do |row|
+          if row[5] =~ /@/
+            flash[:error] = "Data file must not be unencrypted!"
+            error = true
+            break
+          end
+          if Participant.from_a(row) == nil
+            flash[:error] = "Failed to import participant #{row[0]}"
+            error = true
+            break
+          end
+        end
+        unless error
+          flash[:notice] = "Data file successfully imported."
+        end
+      end
+    end
+    redirect_to admin_url
+  end
 end

@@ -7,6 +7,13 @@
   = link_to 'Export answers', :action => :export
 
 %p
+  <b>Import Data File:</b>
+
+= form_tag import_url, :multipart => true do
+  = file_field_tag "data_file"
+  = submit_tag "Upload"
+
+%p
   <b>Today's Reports:</b>
 
 %ol

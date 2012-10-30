@@ -8,6 +8,7 @@ Hoap::Application.routes.draw do
   get "admin/export"
   get "admin/reports", :as => :all_reports
   get "admin/incomplete", :as => :incomplete
+  post "admin/import", :as => :import
 
   get "survey/index"
 
