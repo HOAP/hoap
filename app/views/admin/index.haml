@@ -27,10 +27,16 @@
 %p
   <b>Today's Incomplete Participants:</b>
 
+%p
+  <i>(Strikethroughs indicate no email address supplied)</i>
+
 %ol
   - @incomplete.each do |pp|
     %li
-      = link_to pp.code, page_url(:key => pp.key)
+      - if pp.email.nil?
+        %strike= link_to pp.code, page_url(:key => pp.key)
+      - else
+        = link_to pp.code, page_url(:key => pp.key)
 
 %p
   = link_to 'All Incomplete Participants', incomplete_url
