@@ -1,7 +1,4 @@
-%p &nbsp;
-%p &nbsp;
-
-%h1 Current Care
+%h1{:style => "margin-top: 5em;"} Current Care
 
 = form_tag save_url(:page => 4, :key => @participant.key) do
   - @question, @answer = @questions[0], @answers[0]
