@@ -10,11 +10,11 @@ class AdminController < ApplicationController
   end
 
   def reports
-    @participants = Participant.where(:exit_code => 0, :completed => true).order("id ASC").select("code, key, email")
+    @participants = Participant.where(:exit_code => 0, :completed => true).order("id ASC").select("code, key")
   end
 
   def incomplete
-    @incomplete = Participant.where(:completed => false).order("id ASC").select("code, key")
+    @incomplete = Participant.where(:completed => false).order("id ASC").select("code, key, email")
   end
 
   def participant
