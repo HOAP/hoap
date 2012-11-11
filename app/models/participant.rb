@@ -66,7 +66,7 @@ class Participant < ActiveRecord::Base
       participant.set_exit_type(ary[7])
       participant[:c_audit_c] = ary[8].to_i unless ary[8].nil?
       participant[:c_audit] = ary[9].to_i unless ary[9].nil?
-      participant[:c_bac] = ary[10].to_i unless ary[10].nil?
+      participant[:c_bac] = ary[10].to_f unless ary[10].nil?
       participant[:c_ldq] = ary[11].to_i unless ary[11].nil?
       participant.set_appointment_type(ary[13])
       if participant.save
