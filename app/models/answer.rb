@@ -34,9 +34,10 @@ class Answer < ActiveRecord::Base
   end
 
   def self.from_a(participant_id, ary)
-    qid = 1
-    (18..(ary.length - 1)).each do |i|
-      Answer.create(:participant_id => participant_id, :question_id => qid += 1, :value => ary[i])
+    values = ary[(18..(ary.length - 1))]
+    questions = Question.all(:select => [:id, :page], :order => "id ASC")
+    questions.each do |question|
+      Answer.create(:participant_id => participant_id, :question_id => question.id, :page => question.page, :value => ary.shift)
     end
   end
 end
