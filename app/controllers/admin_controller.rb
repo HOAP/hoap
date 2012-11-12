@@ -26,20 +26,32 @@ class AdminController < ApplicationController
   end
 
   def export
-    filename = "HOAP-#{DateTime.now.strftime("%Y%m%d%H%M")}.csv"
-    participants = Participant.order("id ASC")
-    header = %w{ParticipantID Code Key Page Name Email Completed CompletionType AUDITC AUDIT}
-    header += %w{BAC LDQ ReportCopy DAOCAppoint ReportTime FactsTime SupportTime TipsTime}
-    Question.order("id ASC").pluck(:page).uniq.each do |page|
-      Question.count(:conditions => {:page => page}).times do |q|
-        header << "Pg#{page}Q#{q + 1}"
+    cache_file = "db/export_cache.yml"
+    if File.exists?(cache_file)
+      records = Psych.load_file(cache_file)
+      last = Time.zone.at(records.delete("last"))
+    else
+      records = Hash.new
+      last = Time.zone.at(0)
+      header = %w{ParticipantID Code Key Page Name Email Completed CompletionType AUDITC AUDIT}
+      header += %w{BAC LDQ ReportCopy DAOCAppoint ReportTime FactsTime SupportTime TipsTime}
+      Question.order("id ASC").pluck(:page).uniq.each do |page|
+        Question.count(:conditions => {:page => page}).times do |q|
+          header << "Pg#{page}Q#{q + 1}"
+        end
       end
+      records["header"] = header.to_csv
     end
-    results = CSV.generate do |file|
-      file << header
-      participants.each do |participant|
-        file << participant.to_a
-      end
+    filename = "HOAP-#{DateTime.now.strftime("%Y%m%d%H%M")}.csv"
+    current = Time.zone.now.to_i
+    participants = Participant.where("updated_at >= ?", last).order("id ASC")
+    participants.each do |participant|
+      records[participant.id] = participant.to_a.to_csv
+    end
+    results = records.values.join("")
+    records["last"] = current
+    File.open(cache_file, "wb") do |file|
+      file.print(records.to_yaml)
     end
     send_data(results, :type => 'text/csv', :disposition => 'inline', :filename => filename)
   end
