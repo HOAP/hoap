@@ -41,3 +41,5 @@ gem 'authlogic'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+gem 'redis', '~> 3.0.2'
