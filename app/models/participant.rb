@@ -3,6 +3,8 @@ class Participant < ActiveRecord::Base
   has_many :answers
   serialize :c_money, Array
 
+  @@cache = Redis.new
+
   @@control_pct = 50
 
   @@audit_values = {
@@ -74,6 +76,29 @@ class Participant < ActiveRecord::Base
       end
     end
     return participant
+  end
+
+  def self.export_csv
+    if @@cache.exists("lastexport")
+      lastexport = Time.zone.at(@@cache.get("lastexport").to_i)
+    else
+      lastexport = Time.zone.at(0)
+    end
+    unless @@cache.exists("header")
+      @@cache.set("header", self.gen_header)
+    end
+    current = Time.zone.now.to_i
+    participants = Participant.where("updated_at >= ?", lastexport).order("id ASC")
+    participants.each do |participant|
+      @@cache.multi do
+        @@cache.set(participant.id, participant.to_a.to_csv)
+        @@cache.sadd("ids", participant.id)
+      end
+    end
+    ids = ["header"] + @@cache.sort("ids")
+    rows = @@cache.mget(ids)
+    @@cache.set("lastexport", current)
+    return rows.join("")
   end
 
   # Sets the current page to that of the page the participant
@@ -439,5 +464,18 @@ class Participant < ActiveRecord::Base
     else
       self.exit_code = 4
     end
+  end
+
+  private
+
+  def self.gen_header
+    header = %w{ParticipantID Code Key Page Name Email Completed CompletionType AUDITC AUDIT}
+    header += %w{BAC LDQ ReportCopy DAOCAppoint ReportTime FactsTime SupportTime TipsTime}
+    Question.order("id ASC").pluck(:page).uniq.each do |page|
+      Question.count(:conditions => {:page => page}).times do |q|
+        header << "Pg#{page}Q#{q + 1}"
+      end
+    end
+    return header.to_csv
   end
 end

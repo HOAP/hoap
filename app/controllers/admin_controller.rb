@@ -1,7 +1,7 @@
-require 'csv'
-
 class AdminController < ApplicationController
   before_filter :require_user
+
+  @cache = Redis.new
 
   def index
     @count = Participant.where(:completed => true).count
@@ -26,34 +26,8 @@ class AdminController < ApplicationController
   end
 
   def export
-    cache_file = "db/export_cache.yml"
-    if File.exists?(cache_file)
-      records = Psych.load_file(cache_file)
-      last = Time.zone.at(records.delete("last"))
-    else
-      records = Hash.new
-      last = Time.zone.at(0)
-      header = %w{ParticipantID Code Key Page Name Email Completed CompletionType AUDITC AUDIT}
-      header += %w{BAC LDQ ReportCopy DAOCAppoint ReportTime FactsTime SupportTime TipsTime}
-      Question.order("id ASC").pluck(:page).uniq.each do |page|
-        Question.count(:conditions => {:page => page}).times do |q|
-          header << "Pg#{page}Q#{q + 1}"
-        end
-      end
-      records["header"] = header.to_csv
-    end
-    filename = "HOAP-#{DateTime.now.strftime("%Y%m%d%H%M")}.csv"
-    current = Time.zone.now.to_i
-    participants = Participant.where("updated_at >= ?", last).order("id ASC")
-    participants.each do |participant|
-      records[participant.id] = participant.to_a.to_csv
-    end
-    results = records.values.join("")
-    records["last"] = current
-    File.open(cache_file, "wb") do |file|
-      file.print(records.to_yaml)
-    end
-    send_data(results, :type => 'text/csv', :disposition => 'inline', :filename => filename)
+    filename = "HOAP-#{Time.zone.now.strftime("%Y%m%d%H%M")}.csv"
+    send_data(Participant.export_csv, :type => 'text/csv', :disposition => 'inline', :filename => filename)
   end
 
   def import
@@ -61,23 +35,20 @@ class AdminController < ApplicationController
     if params[:data_file].content_type.chomp =~ /^text\/csv$/
       data = CSV.parse(params[:data_file].read)
       data.shift # Discard the header row
-      if data[0][5] =~ /@/
-      else
-        data.each do |row|
-          if row[5] =~ /@/
-            flash[:error] = "Data file must not be unencrypted!"
-            error = true
-            break
-          end
-          if Participant.from_a(row) == nil
-            flash[:error] = "Failed to import participant #{row[0]}"
-            error = true
-            break
-          end
+      data.each do |row|
+        if row[5] =~ /@/
+          flash[:error] = "Data file must not be unencrypted!"
+          error = true
+          break
         end
-        unless error
-          flash[:notice] = "Data file successfully imported."
+        if Participant.from_a(row) == nil
+          flash[:error] = "Failed to import participant #{row[0]}"
+          error = true
+          break
         end
+      end
+      unless error
+        flash[:notice] = "Data file successfully imported."
       end
     end
     redirect_to admin_url
