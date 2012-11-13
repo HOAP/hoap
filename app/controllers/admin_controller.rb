@@ -1,8 +1,6 @@
 class AdminController < ApplicationController
   before_filter :require_user
 
-  @cache = Redis.new
-
   def index
     @count = Participant.where(:completed => true).count
     @participants = Participant.where("created_at >= ? AND exit_code = 0 AND completed = true", 1.day.ago).order("id ASC").select("code, key")

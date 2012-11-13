@@ -1,6 +1,8 @@
 Hoap::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  ENV['REDIS_URL'] = "redis://redistogo:edda5c3afa91af4ebc62369e62af0dc2@slimehead.redistogo.com:9441/"
+
   # Code is not reloaded between requests
   config.cache_classes = true
 

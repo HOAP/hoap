@@ -3,8 +3,6 @@ class Participant < ActiveRecord::Base
   has_many :answers
   serialize :c_money, Array
 
-  @@cache = Redis.new
-
   @@control_pct = 50
 
   @@audit_values = {
@@ -79,25 +77,25 @@ class Participant < ActiveRecord::Base
   end
 
   def self.export_csv
-    if @@cache.exists("lastexport")
-      lastexport = Time.zone.at(@@cache.get("lastexport").to_i)
+    if REDIS.exists("lastexport")
+      lastexport = Time.zone.at(REDIS.get("lastexport").to_i)
     else
       lastexport = Time.zone.at(0)
     end
-    unless @@cache.exists("header")
-      @@cache.set("header", self.gen_header)
+    unless REDIS.exists("header")
+      REDIS.set("header", self.gen_header)
     end
     current = Time.zone.now.to_i
     participants = Participant.where("updated_at >= ?", lastexport).order("id ASC")
     participants.each do |participant|
-      @@cache.multi do
-        @@cache.set(participant.id, participant.to_a.to_csv)
-        @@cache.sadd("ids", participant.id)
+      REDIS.multi do
+        REDIS.set(participant.id, participant.to_a.to_csv)
+        REDIS.sadd("ids", participant.id)
       end
     end
-    ids = ["header"] + @@cache.sort("ids")
-    rows = @@cache.mget(ids)
-    @@cache.set("lastexport", current)
+    ids = ["header"] + REDIS.sort("ids")
+    rows = REDIS.mget(ids)
+    REDIS.set("lastexport", current)
     return rows.join("")
   end
 
