@@ -30,7 +30,7 @@ class AdminController < ApplicationController
 
   def import
     error = false
-    if params[:data_file].content_type.chomp =~ /^text\/csv$/
+    if !params[:data_file].nil? && params[:data_file].content_type.chomp =~ /^text\/csv$/
       data = CSV.parse(params[:data_file].read)
       data.shift # Discard the header row
       data.each do |row|
