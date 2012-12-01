@@ -41,10 +41,11 @@ class Participant < ActiveRecord::Base
   end
 
   def self.make(code)
+    participant = self.new(:code => code)
     begin
-      key = Digest::SHA1.hexdigest("#{rand} - #{Time.now.to_f}")[0..11]
-      participant = self.create(:key => key, :code => code)
-    rescue
+      participant.key = SecureRandom.hex(6)
+      participant.save
+    rescue ActiveRecord::RecordNotUnique
       retry
     end
     Answer.make_all(participant)
