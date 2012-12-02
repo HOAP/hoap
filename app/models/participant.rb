@@ -52,24 +52,34 @@ class Participant < ActiveRecord::Base
     return participant
   end
 
+  def self.import(data)
+    keys = Participant.pluck(:key).to_set
+    data.each do |row|
+      if keys.include?(row[2])
+        next
+      elsif row[5] =~ /@/
+        raise "Data file not encrypted!"
+      else
+        self.from_a(row)
+      end
+    end
+  end
+
   # Import participant data from an array of values (as exported by
   # the Participant#to_a method)
   def self.from_a(ary)
-    participant = nil
-    if self.exists?(:key => ary[2])
-      participant = Participant.where(:key => ary[2]).first
-    else
-      participant = Participant.new(:key => ary[2], :code => ary[1], :page => ary[3], :name => ary[4], :report_copy => ary[12], :report_time => ary[14].to_i, :facts_time => ary[15].to_i, :support_time => ary[16].to_i, :tips_time => ary[17].to_i)
-      if !ary[5].nil? && ary[5].length == 172
-        participant[:email] = Base64.decode64(ary[5])
-      end
-      participant.completed = (ary[6] == "true")
-      participant.set_exit_type(ary[7])
-      participant[:c_audit_c] = ary[8].to_i unless ary[8].nil?
-      participant[:c_audit] = ary[9].to_i unless ary[9].nil?
-      participant[:c_bac] = ary[10].to_f unless ary[10].nil?
-      participant[:c_ldq] = ary[11].to_i unless ary[11].nil?
-      participant.set_appointment_type(ary[13])
+    participant = Participant.new(:key => ary[2], :code => ary[1], :page => ary[3], :name => ary[4], :report_copy => ary[12], :report_time => ary[14].to_i, :facts_time => ary[15].to_i, :support_time => ary[16].to_i, :tips_time => ary[17].to_i)
+    if !ary[5].nil? && ary[5].length == 172
+      participant[:email] = Base64.decode64(ary[5])
+    end
+    participant.completed = (ary[6] == "true")
+    participant.set_exit_type(ary[7])
+    participant[:c_audit_c] = ary[8].to_i unless ary[8].nil?
+    participant[:c_audit] = ary[9].to_i unless ary[9].nil?
+    participant[:c_bac] = ary[10].to_f unless ary[10].nil?
+    participant[:c_ldq] = ary[11].to_i unless ary[11].nil?
+    participant.set_appointment_type(ary[13])
+    ActiveRecord::Base.transaction do
       if participant.save
         Answer.from_a(participant.id, ary)
       end

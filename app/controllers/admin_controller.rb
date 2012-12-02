@@ -33,20 +33,11 @@ class AdminController < ApplicationController
     if !params[:data_file].nil? && params[:data_file].content_type.chomp =~ /^text\/csv$/
       data = CSV.parse(params[:data_file].read)
       data.shift # Discard the header row
-      data.each do |row|
-        if row[5] =~ /@/
-          flash[:error] = "Data file must not be unencrypted!"
-          error = true
-          break
-        end
-        if Participant.from_a(row) == nil
-          flash[:error] = "Failed to import participant #{row[0]}"
-          error = true
-          break
-        end
-      end
-      unless error
+      begin
+        Participant.import(data)
         flash[:notice] = "Data file successfully imported."
+      rescue Exception => e
+        flash[:error] = e.message
       end
     end
     redirect_to admin_url
