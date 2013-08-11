@@ -126,33 +126,11 @@ class Participant < ActiveRecord::Base
   # Increment the current page, and save.
   # If the end is reached, automatically sets completed to true.
   def next_page!
-    # Exit as appropriate (i.e. Control, Ineleigible, Completed)
-    if self.page == 3 || self.page == 4 || self.page == 7
+    # Skip LDQ if not drunk any alcohol in last 4 weeks.
+    if self.page == 4
       answer = Answer.where(:participant_id => self.id, :page => self.page).pluck(:value)
-      if self.page == 3 && answer[0] =~ /no/i
-        # Ineligible if they have not consumed alcohol in last year.
-        self.exit_code = 1
-        self.completed = true
-      elsif self.page == 4 && answer[0] =~ /yes/i
-        # Ineligible if they are currently receiving treatment for alcohol use.
-        self.exit_code = 2
-        self.completed = true
-      elsif self.page == 7 && answer[0] =~ /no/i
-        # Skip LDQ if not drunk any alcohol in last 4 weeks.
+      if answer[0] =~ /no/i
         self.page += 2
-      end
-    elsif self.page == 5
-      # Check AUDIT-C
-      if self.audit_c < 5
-        # Ineligible if they have sensible drinking habits.
-        self.exit_code = 3
-        self.completed = true
-      else
-        # Stratify into control/subject
-        if SecureRandom.random_number(100) < @@control_pct
-          self.exit_code = 4
-          self.completed = true
-        end
       end
     end
     if !self.completed
