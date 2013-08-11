@@ -10,7 +10,7 @@
 %p
   Please use the definitions of Standard Drinks on the left as a guide.
 
-= form_tag save_url(:page => 8, :key => @participant.key) do
+= form_tag save_url(:page => 5, :key => @participant.key) do
   - @questions.length.times do |i|
     - @question, @answer = @questions[i], @answers[i]
     %p
