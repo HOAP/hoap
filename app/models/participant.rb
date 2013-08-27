@@ -6,16 +6,16 @@ class Participant < ActiveRecord::Base
   @@control_pct = 50
 
   @@audit_values = {
-    6 => {"Never or almost never" => 0, "Less than once a month" => 1, "Once a month" => 1, "Once every two weeks" => 2, "Once a week" => 2, "Two or three times a week" => 3, "Four or five times a week" => 4, "Six or seven times a week" => 4},
-    7 => {"1" => 0, "2" => 0, "3" => 1, "4" => 1, "5" => 2, "6" => 2, "7" => 3, "8" => 3, "9" => 3, "10" => 4, "11" => 4, "12" => 4, "13" => 4, "14" => 4, "15" => 4, "16" => 4, "17" => 4, "18" => 4, "19" => 4, "20" => 4, "21" => 4, "22" => 4, "23" => 4, "24" => 4, "25-29" => 4, "30-34" => 4, "35-39" => 4, "40-49" => 4, "50 or more" => 4},
-    8 => {"Never" => 0, "Once or twice a year" => 1, "Less than monthly" => 1, "Monthly" => 2, "Weekly" => 3, "Daily or almost daily" => 4},
+    4 => {"Never or almost never" => 0, "Less than once a month" => 1, "Once a month" => 1, "Once every two weeks" => 2, "Once a week" => 2, "Two or three times a week" => 3, "Four or five times a week" => 4, "Six or seven times a week" => 4},
+    5 => {"1" => 0, "2" => 0, "3" => 1, "4" => 1, "5" => 2, "6" => 2, "7" => 3, "8" => 3, "9" => 3, "10" => 4, "11" => 4, "12" => 4, "13" => 4, "14" => 4, "15" => 4, "16" => 4, "17" => 4, "18" => 4, "19" => 4, "20" => 4, "21" => 4, "22" => 4, "23" => 4, "24" => 4, "25-29" => 4, "30-34" => 4, "35-39" => 4, "40-49" => 4, "50 or more" => 4},
+    6 => {"Never" => 0, "Once or twice a year" => 1, "Less than monthly" => 1, "Monthly" => 2, "Weekly" => 3, "Daily or almost daily" => 4},
+    7 => {"Never" => 0, "Less than monthly" => 1, "Monthly" => 2, "Weekly" => 3, "Daily or almost daily" => 4},
+    8 => {"Never" => 0, "Less than monthly" => 1, "Monthly" => 2, "Weekly" => 3, "Daily or almost daily" => 4},
     9 => {"Never" => 0, "Less than monthly" => 1, "Monthly" => 2, "Weekly" => 3, "Daily or almost daily" => 4},
     10 => {"Never" => 0, "Less than monthly" => 1, "Monthly" => 2, "Weekly" => 3, "Daily or almost daily" => 4},
     11 => {"Never" => 0, "Less than monthly" => 1, "Monthly" => 2, "Weekly" => 3, "Daily or almost daily" => 4},
-    12 => {"Never" => 0, "Less than monthly" => 1, "Monthly" => 2, "Weekly" => 3, "Daily or almost daily" => 4},
-    13 => {"Never" => 0, "Less than monthly" => 1, "Monthly" => 2, "Weekly" => 3, "Daily or almost daily" => 4},
-    14 => {"No" => 0, "Yes, but not in the last year" => 2, "Yes, during the last year" => 4},
-    15 => {"No" => 0, "Yes, but not in the last year" => 2, "Yes, during the last year" => 4}
+    12 => {"No" => 0, "Yes, but not in the last year" => 2, "Yes, during the last year" => 4},
+    13 => {"No" => 0, "Yes, but not in the last year" => 2, "Yes, during the last year" => 4}
   }
 
   @@avg_dpo = {
@@ -159,10 +159,10 @@ class Participant < ActiveRecord::Base
     end
   end
 
-  # The AUDIT-C score (page 5) - a reduced AUDIT to check eligibility.
+  # The AUDIT-C score (page 3) - a reduced AUDIT to check eligibility.
   def audit_c
     if self.c_audit_c.nil?
-      answers = Answer.where(:participant_id => self.id, :page => 5).order("id ASC")
+      answers = Answer.where(:participant_id => self.id, :page => 3).order("id ASC")
       self.c_audit_c = answers.reduce(0) do |sum, a|
         sum + audit_score(a.question_id, a.value)
       end
@@ -171,10 +171,10 @@ class Participant < ActiveRecord::Base
     return self.c_audit_c
   end
 
-  # The AUDIT score (page 5 & 6)
+  # The AUDIT score (page 3)
   def audit
     if self.c_audit.nil?
-      answers = Answer.where(:participant_id => self.id, :page => [5, 6]).order("id ASC")
+      answers = Answer.where(:participant_id => self.id, :page => 3).order("id ASC")
       self.c_audit = answers.reduce(0) do |sum, a|
         sum + audit_score(a.question_id, a.value)
       end
@@ -183,10 +183,10 @@ class Participant < ActiveRecord::Base
     self.c_audit
   end
 
-  # The Leeds Dependence Questionnaire score (page 9)
+  # The Leeds Dependence Questionnaire score (page 6)
   def ldq
     if self.c_ldq.nil?
-      answers = Answer.where(:participant_id => self.id, :page => 9).order("id ASC")
+      answers = Answer.where(:participant_id => self.id, :page => 6).order("id ASC")
       self.c_ldq = answers.reduce(0) do |sum, a|
         sum + a.value.to_i
       end
@@ -196,13 +196,13 @@ class Participant < ActiveRecord::Base
   end
 
   def typical_drinks
-    values = Answer.where(:participant_id => self.id, :page => 5).order("id ASC").pluck(:value)
+    values = Answer.where(:participant_id => self.id, :page => 3).order("id ASC").pluck(:value)
     return values[1]
   end
 
   def dpw
     if self.c_dpw.nil?
-      values = Answer.where(:participant_id => self.id, :page => 5).order("id ASC").pluck(:value)
+      values = Answer.where(:participant_id => self.id, :page => 3).order("id ASC").pluck(:value)
       case values[0]
       when /^Never/
         mult = 0
@@ -236,7 +236,7 @@ class Participant < ActiveRecord::Base
   def bac
     if self.c_bac.nil?
       # Get the values of the Answers needed for the calculation
-      reqd_answers = Answer.where(:participant_id => self.id, :page => 8).order("id ASC").pluck(:value)
+      reqd_answers = Answer.where(:participant_id => self.id, :page => 5).order("id ASC").pluck(:value)
       reqd_answers += Answer.where(:participant_id => self.id, :page => 2).order("id ASC").pluck(:value)
       # Number of Standard Drinks
       sd = reqd_answers[0].to_i
@@ -262,7 +262,7 @@ class Participant < ActiveRecord::Base
   end
 
   def display_dpo?
-    a = Answer.where(:participant_id => self.id, :page => 5).order("id ASC").limit(2).pluck(:value)
+    a = Answer.where(:participant_id => self.id, :page => 3).order("id ASC").limit(2).pluck(:value)
     return a[1].to_i > 4
   end
 
@@ -284,7 +284,7 @@ class Participant < ActiveRecord::Base
       a = Answer.where(:participant_id => self.id, :page => 2).order("id ASC").limit(2).pluck(:value)
       g.data(self.peergroup, @@avg_dpo[a[0]][a[1]])
     end
-    a = Answer.where(:participant_id => self.id, :page => 5).order("id ASC").limit(2).pluck(:value)
+    a = Answer.where(:participant_id => self.id, :page => 3).order("id ASC").limit(2).pluck(:value)
     g.data("YOU", a[1].to_i)
     g.sort = false
     g.minimum_value = 0
@@ -334,7 +334,7 @@ class Participant < ActiveRecord::Base
   def show_peer_dpo?
     if self.peer_dpo.nil?
       a = Answer.where(:participant_id => self.id, :page => 2).order("id ASC").limit(2).pluck(:value)
-      a += Answer.where(:participant_id => self.id, :page => 5).order("id ASC").limit(2).pluck(:value)
+      a += Answer.where(:participant_id => self.id, :page => 3).order("id ASC").limit(2).pluck(:value)
       self.peer_dpo = a[3].to_i >= @@avg_dpo[a[0]][a[1]]
     end
     return self.peer_dpo
