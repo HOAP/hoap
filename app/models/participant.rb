@@ -312,7 +312,7 @@ class Participant < ActiveRecord::Base
   end
 
   def audit_only?
-    a = Answer.where(:participant_id => self.id, :page => 7).pluck(:value)
+    a = Answer.where(:participant_id => self.id, :page => 4).pluck(:value)
     return a[0] == "No"
   end
 
