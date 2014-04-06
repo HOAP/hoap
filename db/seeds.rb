@@ -70,5 +70,5 @@ if reseed && !questions.empty?
 end
 
 unless reseed
-  User.create(:login => "tony", :email => "tony@agrav.net", :password => "default", :password_confirmation => "default", :admin => true)
+  User.create(:login => "admin", :email => "admin@example.com", :password => "default", :password_confirmation => "default", :admin => true)
 end

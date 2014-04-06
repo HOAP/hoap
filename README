@@ -13,7 +13,7 @@ The version that was administered to the participants is available on the
 Requirements
 ------------
 
-* Ruby 1.9 or later
+* Ruby 1.9 or later with Bundler
 * Bundler
 * PostgeSQL 9.0 or later
 * Redis 2.0 or later
@@ -24,9 +24,9 @@ Installation
 
 # Clone the repository to the location you wish to run the survey from.
 # Edit config/database.yml with the connection details for your database.
-# Run @bundle install@ to install all of the required Ruby libraries.
+# Run "bundle install" to install all of the required Ruby libraries.
 # Edit db/seeds.rb and change the details for the default admin user.
-# Run @rake db:setup@ to create the database tables and enter the
+# Run "rake db:setup" to create the database tables and enter the
   data required to run the survey.
 # Configure the Unicorn application server by editing config/unicorn.conf.rb
   - it is currently configured to listen on a socket file, but this can be
@@ -34,12 +34,18 @@ Installation
   a web server such as Apache or nginx in front of Unicorn, proxying
   connections to Unicorn for the survey, and serving the static files from
   'public' folder.
-# Start the application @bundle exec unicorn -c config/unicorn.cong.rb@
+# Start the application: bundle exec unicorn -c config/unicorn.cong.rb
 
 Heroku
 ------
 
 This survey was run publicly using the Heroku application hosting service,
 and so is pretty much ready to go. You just need to create your account,
-create the application, and push this repository. It should handle a light
-load and a couple of hundred applicants without problems on the free tier.
+and follow the instructions on uploading and existing application. The
+application has already been configured, you will just need to run the
+commands to start everything up. Note: you may recieve spurious warnings
+regarding the existance of the 'vendor/plugins' folder - these warnings
+are incorrect, and can be safely ignored.
+
+It should handle a light load and a couple of hundred applicants without
+problems on the free tier.
